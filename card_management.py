@@ -55,7 +55,7 @@ while True:
 		e=raw_input("please input you new user:")
 
 		if i<len(add):
-			add[int(i)] = "%s"%e
+			add[int(i)] = "%s"%e #Coercive type conversion int(i)
 			print("your update number %s"%i)
 			print("update user is : %s"%e)
 		else:
