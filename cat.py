@@ -6,7 +6,7 @@ class Cat:
 	weight = 6
 
 	def miaomaio(self):
-		print("cat maio miao")
+		print("cat is call")
 
 	def catch(self):
 		print("catch a mouse")
@@ -15,14 +15,14 @@ class Cat:
 class Bosi(Cat):
 	pass
 
-	def naoyangyang(self):
-		print("bo si mao naoyangyang")
+	def scratch(self):
+		print("bo si mao is scratching")
 	#color = 'black'
 	#legs = 4
 	#weight = 6
 
 	#def miaomaio(self):
-	#	print("cat maio miao")
+	#	print("cat is call")
 
 	#def catch(self):
 	#	print("catch a mouse")
@@ -40,8 +40,8 @@ class TomCat(Bosi):
 #bosi = Bosi()
 #bosi.miaomaio()
 #bosi.catch()
-#bosi.naoyangyang()
+#bosi.scratch()
 
 tom = TomCat()
-tom.naoyangyang()
+tom.scratch()
 
