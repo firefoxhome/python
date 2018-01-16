@@ -1,6 +1,8 @@
 #coding=utf-8  
 ''''' 
 Created on 2018-1-10
+
+Version:0.1
  
 Author: firefoxhome
 
@@ -8,6 +10,10 @@ Theme: Web Crawler
 
 Need : python2.7
 sudo pip install beautifulsoup4
+1. Get www.kano.com pool hashrate5m
+2. Run once in 5 seconds
+3. Data into file data.txt
+4. Craw hashrate5m
 '''  
 import urllib2   
 import re   
