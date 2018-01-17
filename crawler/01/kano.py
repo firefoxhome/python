@@ -24,7 +24,7 @@ import time
 while True:
 	page = urllib2.urlopen('https://www.kano.is/address.php?a=1HCmGvkbq7ULG5qeKy1wYVZbvKjPf3z26A')   
 	contents = page.read()   
-	#获得了整个网页的内容也就是源代码  
+	#Get the content of the entire Web page is the source code  
 	#print(contents)
 	soup = BeautifulSoup(contents,"html.parser")
 	#soup.find_all('div', class_='info')
