@@ -10,18 +10,20 @@ import urllib2
 import re   
 from bs4 import BeautifulSoup  
 from distutils.filelist import findall 
+import webbrowser
 
 #sudo pip install requests 
 #Need : python2.7
 #sudo pip install beautifulsoup4
 
 #2018-1-26 17:21
+#2018-1-30 10:53  Add Increase the download success of the firmware information response server
 
 
 
 #list1 = ['MM721','MM741','MM761','MM821']
 #list2 = ['pmu721','pmu741','pmu821']
-count = 0
+
 
 def mymovefile(srcfile, dstfile):
 	if not os.path.isfile(srcfile):
@@ -35,7 +37,7 @@ def mymovefile(srcfile, dstfile):
 
 def Schedule(a,b,c):
 
-    '''''
+    '''
 
     a:已经下载的数据块
 
@@ -65,8 +67,21 @@ def check(fs,fd):
     if fs == fd:
         print "MD5 Right"
         print "Firmware download successed"
+
+        output = os.popen('ifconfig | grep wlp2s0 | cut -c 39-65')
+        mac =  output.read()
+        #print mac
+        str = 'http://192.168.1.179/mac/address.py?a=%s' %mac
+        print str
+        
+        url = str +'&b=8211712-16c14b0'  
+        print url
+        webbrowser.open(url, new=0, autoraise=True)
+
     else:
         print "MD5 Error,Please download it again"
+        count = 0
+        
         while (count < 4):
             print 'The count is:', count
             count = count + 1
