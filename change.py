@@ -5,8 +5,7 @@ import os
 import shutil
 import urllib2 
 import requests  
-import urllib
-import urllib2   
+import urllib 
 import re   
 from bs4 import BeautifulSoup  
 from distutils.filelist import findall 
@@ -16,8 +15,9 @@ import webbrowser
 #Need : python2.7
 #sudo pip install beautifulsoup4
 
-#2018-1-26 17:21
+#2018-1-26 17:21  Achieve basic functions
 #2018-1-30 10:53  Add Increase the download success of the firmware information response server
+#2018-1-30 14:45  Solve the firmware movement is not covered
 
 
 
@@ -73,7 +73,7 @@ def check(fs,fd):
         #print mac
         str = 'http://192.168.1.179/mac/address.py?a=%s' %mac
         print str
-        
+
         url = str +'&b=8211712-16c14b0'  
         print url
         webbrowser.open(url, new=0, autoraise=True)
@@ -117,7 +117,7 @@ def check(fs,fd):
             #print ck2
             check(ck1, ck2)
             initial = '/home/factory/canaan_factory/MM821.mcs'
-            initial_bak = '/home/factory/Avalon-extras/scripts/factory'
+            initial_bak = '/home/factory/Avalon-extras/scripts/factory/MM821.mcs'
 
 
         print "Three downloads failed,Good bye!"
@@ -144,7 +144,8 @@ print "当前工作目录 : %s" % os.getcwd()
 os.system("ls")
 #filename = r'/home/factory/Avalon-extras/scripts/factory/MM741.mcs'
 srcfile = '/home/factory/Avalon-extras/scripts/factory/MM821.mcs'
-dstfile = '/home/factory/canaan_factory/'
+dstfile = '/home/factory/canaan_factory/MM821.mcs'
+#Add dstfile = /home/factory/canaan_factory/MM821.mcs, solve the firmware movement is not covered.
 
 #Get links
 
