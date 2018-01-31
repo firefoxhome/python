@@ -19,6 +19,7 @@ import webbrowser
 #2018-1-30 10:53  Add Increase the download success of the firmware information response server
 #2018-1-30 14:45  Solve the firmware movement is not covered
 #2018-1-31 19:47  Modularized the function of the code
+#2018-1-31 20:15  Modify the function check
 
 
 def system_ls():
@@ -147,8 +148,9 @@ def check(fs,fd):
             #print ck1
             #print ck2
             check(ck1, ck2)
-            initial = '/home/factory/canaan_factory/MM821.mcs'
-            initial_bak = '/home/factory/Avalon-extras/scripts/factory/MM821.mcs'
+
+        initial = '/home/factory/canaan_factory/MM821.mcs'
+        initial_bak = '/home/factory/Avalon-extras/scripts/factory/MM821.mcs'
 
 
         print "Three downloads failed,Good bye!"
