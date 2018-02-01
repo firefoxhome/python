@@ -20,6 +20,7 @@ import sys
 #2018-1-30 14:45  Solve the firmware movement is not covered
 #2018-1-31 20:15  Modify the function check
 #2018-2-1  13:28  The client can read the version number of its own and the server
+#2018-2-1  16:25  Added to the version judgment, the latest exit
 
 
 
@@ -55,7 +56,7 @@ def Schedule(a,b,c):
 
         per = 100
 
-    print '%.2f%%' % per,'已下载的大小:',a*b,'文件大小:',c
+    print '%d%%' % per,'已下载的大小:',a*b,'文件大小:',c
 
     #print '已经下载的数据块:',a#,'\n'
 
@@ -236,9 +237,31 @@ os.chdir('/home/factory/Avalon-extras')
 print "当前工作目录 : %s" % os.getcwd()
 os.system("ls")
 
-version = os.popen('cat version | cut -c 1-4')
-ver = version.read()
+# version = os.popen('cat version | cut -c 1-4')
+# ver = version.read()
+# print ver
+
+fd = os.open("version",os.O_RDWR)
+#version = os.popen('cat version | cut -c 1-4').read(fd,1)
+ver = os.read(fd,4)
+#print ver
 print ver
+
+
+
+result = re.search( r'("script_version": ")(.*?)(")', contents, re.M|re.I)
+net_ver = result.group(2)
+print net_ver
+
+
+if ver == net_ver:
+    print "The version is already the latest"
+    exit(0)
+
+    #print "The firmware is not required to be downloaded"
+else:
+    print "The version is not the latest"
+
 
 output = os.popen('ifconfig | grep wlp2s0 | cut -c 39-65')
 mac =  output.read()
