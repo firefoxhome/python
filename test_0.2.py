@@ -21,6 +21,7 @@ import sys
 #2018-1-31 20:15  Modify the function check
 #2018-2-1  13:28  The client can read the version number of its own and the server
 #2018-2-1  16:25  Added to the version judgment, the latest exit
+#2018-2-5  21:00  The name of the modified network card is eth0
 
 
 
@@ -117,21 +118,66 @@ def check(fs,fd):
 
         print "Three downloads failed,Good bye!"
         mymovefile(initial,initial_bak)
-'''
-def downfirmware():
-    #Get links
-    output = os.popen('ifconfig | grep wlp2s0 | cut -c 39-65')
-    mac =  output.read()
-    #print mac
-    str = 'http://192.168.1.179/mac/address.py?a=%s' %mac
-    print str
-    #Crawl the content
-    page = urllib2.urlopen(str)   
-    contents = page.read()  
-    print(contents)
-'''
 
-	
+
+
+
+#Get links
+output = os.popen('ifconfig | grep eth | cut -c 39-65')
+mac =  output.read()
+#print mac
+str = 'http://192.168.1.179/mac/address.py?a=%s' %mac
+print "The URL is being accessed",str
+
+#Crawl the content
+page = urllib2.urlopen(str)   
+contents = page.read()  
+
+if page.getcode() != 200:
+    os._exit()
+else:
+    print "Server links Right"
+
+print "The content of the obtained web page is",contents
+
+print 'http header:/n', page.info() 
+print 'http status:', page.getcode() 
+#print 'url:', page.geturl() 
+
+
+result = re.search( r'("Download_link": ")(.*?)(")', contents, re.M|re.I)
+address = result.group(2)
+print  "The firmware download address is",address
+
+os.chdir('/home/factory/Avalon-extras')
+print "当前工作目录 : %s" % os.getcwd()
+os.system("ls")
+
+# version = os.popen('cat version | cut -c 1-4')
+# ver = version.read()
+# print ver
+
+fd = os.open("version",os.O_RDWR)
+#version = os.popen('cat version | cut -c 1-4').read(fd,1)
+ver = os.read(fd,4)
+#print ver
+print "Local script version",ver
+
+result = re.search( r'("script_version": ")(.*?)(")', contents, re.M|re.I)
+net_ver = result.group(2)
+print "The latest script version of the server",net_ver
+
+
+
+if ver == net_ver:
+    print "The version is already the latest"
+    #exit(0)
+
+    #print "The firmware is not required to be downloaded"
+else:
+    print "The version is not the latest"
+
+
 #step1 Back up the existing firmware
 #while True:
 os.chdir('/home/factory/Avalon-extras/scripts/factory')
@@ -143,34 +189,6 @@ os.system("ls")
 srcfile = '/home/factory/Avalon-extras/scripts/factory/MM821.mcs'
 dstfile = '/home/factory/canaan_factory/MM821.mcs'
 #Add dstfile = /home/factory/canaan_factory/MM821.mcs, solve the firmware movement is not covered.
-
-#Get links
-
-output = os.popen('ifconfig | grep wlp2s0 | cut -c 39-65')
-mac =  output.read()
-#print mac
-str = 'http://192.168.1.179/mac/address.py?a=%s' %mac
-print str
-#Crawl the content
-page = urllib2.urlopen(str)   
-contents = page.read()  
-print(contents)
-
-
-
-print 'http header:/n', page.info() 
-print 'http status:', page.getcode() 
-#print 'url:', page.geturl() 
-
-if page.getcode() != 200:
-    os._exit()
-else:
-    print "Server links Right"
-
-result = re.search( r'("Download_link": ")(.*?)(")', contents, re.M|re.I)
-address = result.group(2)
-print address
-
 
 
 
@@ -233,41 +251,13 @@ else:
     #print ck2
     check(ck1, ck2)
 
-os.chdir('/home/factory/Avalon-extras')
-print "当前工作目录 : %s" % os.getcwd()
-os.system("ls")
-
-# version = os.popen('cat version | cut -c 1-4')
-# ver = version.read()
-# print ver
-
-fd = os.open("version",os.O_RDWR)
-#version = os.popen('cat version | cut -c 1-4').read(fd,1)
-ver = os.read(fd,4)
-#print ver
-print ver
 
 
-
-result = re.search( r'("script_version": ")(.*?)(")', contents, re.M|re.I)
-net_ver = result.group(2)
-print net_ver
-
-
-if ver == net_ver:
-    print "The version is already the latest"
-    exit(0)
-
-    #print "The firmware is not required to be downloaded"
-else:
-    print "The version is not the latest"
-
-
-output = os.popen('ifconfig | grep wlp2s0 | cut -c 39-65')
-mac =  output.read()
-        #print mac
-str = 'http://192.168.1.179/mac/address.py?a=%s' %mac
-print str
+#output = os.popen('ifconfig | grep eth | cut -c 39-65')
+#mac =  output.read()
+        
+#str = 'http://192.168.1.179/mac/address.py?a=%s' %mac
+#print str
 
 url = str +'&b=8211712-16c14b0' + '&c=%s'%ver  
 print url
