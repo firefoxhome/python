@@ -25,6 +25,7 @@ import sys
 #2018-2-6  14:32  
 #2018-2-25 18:17  Make some changes,delete Note
 #2018-2-26 10:20  Change the server download link
+#2018-2-26 15:54  The verification of changlog has been added
 
 
 def mymovefile(srcfile, dstfile):
@@ -203,16 +204,23 @@ if os.path.exists(srcfile):
 
 
     url = 'https://canaan.io/downloads/software/avalon821/mm/2017-12-27/md5sums'
-    
     md5 = os.path.join('/home/factory/Avalon-extras/scripts/factory','md5sums' )
 
-    local = os.path.join('/home/factory/Avalon-extras/scripts/factory','MM821.mcs' )
+    changelog = 'https://canaan.io/downloads/software/avalon821/mm/2017-12-27/changelog'
+    changeloglocal = os.path.join('/home/factory/Avalon-extras/scripts/factory','changelog' )
 
+    local = os.path.join('/home/factory/Avalon-extras/scripts/factory','MM821.mcs' )
     urllib.urlretrieve(address,local,Schedule)
+
     print "****************************************************************************"
     print "Download the MD5 File"
     print "****************************************************************************"
     urllib.urlretrieve(url,md5,Schedule)
+
+    print "****************************************************************************"
+    print "Download the changelog"
+    print "****************************************************************************"
+    urllib.urlretrieve(changelog,changeloglocal,Schedule)
 
 
     #check MD5
@@ -233,14 +241,22 @@ else:
     #downloads MM821.mcs
     url = 'https://canaan.io/downloads/software/avalon821/mm/2017-12-27/md5sums'
     md5 = os.path.join('/home/factory/Avalon-extras/scripts/factory','md5sums' )
+    
+    changelog = 'https://canaan.io/downloads/software/avalon821/mm/2017-12-27/changelog'
+    changeloglocal = os.path.join('/home/factory/Avalon-extras/scripts/factory','changelog' )
 
     local = os.path.join('/home/factory/Avalon-extras/scripts/factory','MM821.mcs')
-
     urllib.urlretrieve(address,local,Schedule)
+
     print "****************************************************************************"
     print "Download the MD5 File"
     print "****************************************************************************"
     urllib.urlretrieve(url,md5,Schedule)
+
+    print "****************************************************************************"
+    print "Download the changelog"
+    print "****************************************************************************"
+    urllib.urlretrieve(changelog,changeloglocal,Schedule)
 
     #check MD5
     check1 = os.popen('cat md5sums | grep MM821.mcs | cut -c 1-32')
@@ -252,6 +268,9 @@ else:
     check(ck1, ck2)
 
 
+mychangelog = os.popen('cat changelog | grep Version | cut -c 9-23').read()
+print mychangelog
+
 
 #output = os.popen('ifconfig | grep eth | cut -c 39-65')
 #mac =  output.read()
@@ -259,7 +278,8 @@ else:
 #str = 'http://192.168.1.179/mac/address.py?a=%s' %mac
 #print str
 
-url = str +'&b=8211712-16c14b0' + '&c=%s'%ver  
+#url = str +'&b=8211712-16c14b0' + '&c=%s'%ver  
+url = str + '&b=%s'%mychangelog + '&c=%s'%ver 
 print url
 webbrowser.open(url, new=0, autoraise=True)
 
