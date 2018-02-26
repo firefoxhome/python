@@ -26,6 +26,7 @@ import sys
 #2018-2-25 18:17  Make some changes,delete Note
 #2018-2-26 10:20  Change the server download link
 #2018-2-26 15:54  The verification of changlog has been added
+#2018-2-26 20:37  Modify the check functions
 
 
 def mymovefile(srcfile, dstfile):
@@ -80,10 +81,12 @@ def check(fs,fd):
             print 'The count is:', count
             count = count + 1
 
-            output = os.popen('ifconfig | grep wlp2s0 | cut -c 39-65')
+            output = os.popen('ifconfig | grep eth | cut -c 39-65')
             mac =  output.read()
             #print mac
-            str = 'http://192.168.1.179/mac/address.py?a=%s' %mac
+            #str = 'http://192.168.1.179/mac/address.py?a=%s' %mac
+            str = 'http://ams.b-bug.org/mac/address.py?a=%s' %mac
+
             print str
             #Crawl the content
             page = urllib2.urlopen(str)   
@@ -94,7 +97,6 @@ def check(fs,fd):
             md5 = os.path.join('/home/factory/Avalon-extras/scripts/factory','md5sums' )
 
             local = os.path.join('/home/factory/Avalon-extras/scripts/factory','MM821.mcs' )
-
             urllib.urlretrieve(address,local,Schedule)
             print "****************************************************************************"
             print "Download the MD5 File"
@@ -142,7 +144,6 @@ print "The content of the obtained web page is",contents
 
 print 'http header:/n', page.info() 
 print 'http status:', page.getcode() 
-#print 'url:', page.geturl() 
 
 
 result = re.search( r'("Download_link": ")(.*?)(")', contents, re.M|re.I)
@@ -153,14 +154,10 @@ os.chdir('/home/factory/Avalon-extras')
 print "当前工作目录 : %s" % os.getcwd()
 os.system("ls")
 
-# version = os.popen('cat version | cut -c 1-4')
-# ver = version.read()
-# print ver
 
 fd = os.open("version",os.O_RDWR)
 #version = os.popen('cat version | cut -c 1-4').read(fd,1)
 ver = os.read(fd,4)
-#print ver
 print "Local script version",ver
 
 result = re.search( r'("script_version": ")(.*?)(")', contents, re.M|re.I)
@@ -172,7 +169,6 @@ print "The latest script version of the server",net_ver
 if ver == net_ver:
     print "The version is already the latest"
     #exit(0)
-
     #print "The firmware is not required to be downloaded"
 else:
     print "The version is not the latest"
@@ -201,7 +197,6 @@ if os.path.exists(srcfile):
     
 
     #downloads MM821.mcs
-
 
     url = 'https://canaan.io/downloads/software/avalon821/mm/2017-12-27/md5sums'
     md5 = os.path.join('/home/factory/Avalon-extras/scripts/factory','md5sums' )
