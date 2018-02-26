@@ -22,11 +22,9 @@ import sys
 #2018-2-1  13:28  The client can read the version number of its own and the server
 #2018-2-1  16:25  Added to the version judgment, the latest exit
 #2018-2-5  21:00  The name of the modified network card is eth0
-
-
-
-#list1 = ['MM721','MM741','MM761','MM821']
-#list2 = ['pmu721','pmu741','pmu821']
+#2018-2-6  14:32  
+#2018-2-25 18:17  Make some changes,delete Note
+#2018-2-26 10:20  Change the server download link
 
 
 def mymovefile(srcfile, dstfile):
@@ -75,7 +73,7 @@ def check(fs,fd):
        
     else:
         print "MD5 Error,Please download it again"
-        count = 0
+        count = 1
         
         while (count < 4):
             print 'The count is:', count
@@ -126,7 +124,8 @@ def check(fs,fd):
 output = os.popen('ifconfig | grep eth | cut -c 39-65')
 mac =  output.read()
 #print mac
-str = 'http://192.168.1.179/mac/address.py?a=%s' %mac
+#str = 'http://192.168.1.179/mac/address.py?a=%s' %mac
+str = 'http://ams.b-bug.org/mac/address.py?a=%s' %mac
 print "The URL is being accessed",str
 
 #Crawl the content
@@ -204,6 +203,7 @@ if os.path.exists(srcfile):
 
 
     url = 'https://canaan.io/downloads/software/avalon821/mm/2017-12-27/md5sums'
+    
     md5 = os.path.join('/home/factory/Avalon-extras/scripts/factory','md5sums' )
 
     local = os.path.join('/home/factory/Avalon-extras/scripts/factory','MM821.mcs' )
