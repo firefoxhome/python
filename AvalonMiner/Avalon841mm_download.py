@@ -15,7 +15,7 @@ import sys
 #Need : python2.7
 #sudo pip install beautifulsoup4
 
-#2018-2-27 11:45  841 first version
+#2018-2-27 11:45  841 first version+1
 
 def mymovefile(srcfile, dstfile):
 	if not os.path.isfile(srcfile):
@@ -112,15 +112,15 @@ def check(fs,fd):
 
 
 
-#Get links
+
 output = os.popen('ifconfig | grep eth | cut -c 39-65')
 mac =  output.read()
-#print mac
+
 #str = 'http://ams.b-bug.org/mac/address.py?a=%s' %mac
 str = 'http://ams.b-bug.org/mac/?a=%s' %mac
 print "The URL is being accessed",str
 
-#Crawl the content
+
 page = urllib2.urlopen(str)   
 contents = page.read()  
 
@@ -170,7 +170,6 @@ print "当前工作目录 : %s" % os.getcwd()
 os.system("ls")
 
 
-#filename = r'/home/factory/Avalon-extras/scripts/factory/MM741.mcs'
 srcfile = '/home/factory/Avalon-extras/scripts/factory/MM841.mcs'
 dstfile = '/home/factory/canaan_factory/MM841.mcs'
 #Add dstfile = /home/factory/canaan_factory/MM821.mcs, solve the firmware movement is not covered.
@@ -205,7 +204,6 @@ if os.path.exists(srcfile):
     urllib.urlretrieve(changelog,changeloglocal,Schedule)
 
 
-    #check MD5
     check1 = os.popen('cat md5sums | grep MM841.mcs | cut -c 1-32')
     check2 = os.popen('md5sum MM841.mcs | cut -c 1-32')
     ck1 =  check1.read()
@@ -238,7 +236,7 @@ else:
     print "****************************************************************************"
     urllib.urlretrieve(changelog,changeloglocal,Schedule)
 
-    #check MD5
+
     check1 = os.popen('cat md5sums | grep MM841.mcs | cut -c 1-32')
     check2 = os.popen('md5sum MM841.mcs | cut -c 1-32')
     ck1 =  check1.read()
