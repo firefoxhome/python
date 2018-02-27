@@ -27,6 +27,7 @@ import sys
 #2018-2-26 10:20  Change the server download link
 #2018-2-26 15:54  The verification of changlog has been added
 #2018-2-26 20:37  Modify the check functions
+#2018-2-27 11:25  The server side modifies the link again
 
 
 def mymovefile(srcfile, dstfile):
@@ -84,8 +85,9 @@ def check(fs,fd):
             output = os.popen('ifconfig | grep eth | cut -c 39-65')
             mac =  output.read()
             #print mac
-            #str = 'http://192.168.1.179/mac/address.py?a=%s' %mac
-            str = 'http://ams.b-bug.org/mac/address.py?a=%s' %mac
+            #str = 'http://ams.b-bug.org/mac/address.py?a=%s' %mac
+            str = 'http://ams.b-bug.org/mac/?a=%s' %mac
+            
 
             print str
             #Crawl the content
@@ -127,8 +129,8 @@ def check(fs,fd):
 output = os.popen('ifconfig | grep eth | cut -c 39-65')
 mac =  output.read()
 #print mac
-#str = 'http://192.168.1.179/mac/address.py?a=%s' %mac
-str = 'http://ams.b-bug.org/mac/address.py?a=%s' %mac
+#str = 'http://ams.b-bug.org/mac/address.py?a=%s' %mac
+str = 'http://ams.b-bug.org/mac/?a=%s' %mac
 print "The URL is being accessed",str
 
 #Crawl the content
@@ -270,11 +272,11 @@ print mychangelog
 #output = os.popen('ifconfig | grep eth | cut -c 39-65')
 #mac =  output.read()
         
-#str = 'http://192.168.1.179/mac/address.py?a=%s' %mac
+#str = 'http://ams.b-bug.org/mac/?a=%s' %mac
 #print str
 
 #url = str +'&b=8211712-16c14b0' + '&c=%s'%ver  
-url = str + '&b=%s'%mychangelog + '&c=%s'%ver 
+url = str +'&b=%s'%mychangelog + '&c=%s'%ver 
 print url
 webbrowser.open(url, new=0, autoraise=True)
 
