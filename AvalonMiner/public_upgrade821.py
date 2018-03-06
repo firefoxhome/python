@@ -30,6 +30,7 @@ import sys
 #2018-2-27 11:25  The server side modifies the link again
 #2018-3-6  14:16  The test public net is replaced by IP 140.143.16.230
 #2018-3-6  16:23  Repeated downloading two checks on the MD5 check
+#2018-3-6  20:28  Modify the MD5, changlog link
 
 
 def mymovefile(srcfile, dstfile):
@@ -99,7 +100,7 @@ def check(fs,fd):
             contents = page.read()  
             #print(contents)
 
-            url = 'https://canaan.io/downloads/software/avalon821/mm/2017-12-27/md5sums'
+            url = 'https://canaan.io/downloads/software/avalon821/mm/latest/md5sums'
             md5 = os.path.join('/home/factory/Avalon-extras/scripts/factory','md5sums' )
 
             local = os.path.join('/home/factory/Avalon-extras/scripts/factory','MM821.mcs' )
@@ -210,10 +211,10 @@ if os.path.exists(srcfile):
     
 
     #downloads MM821.mcs
-    url = 'https://canaan.io/downloads/software/avalon821/mm/2017-12-27/md5sums'
+    url = 'https://canaan.io/downloads/software/avalon821/mm/latest/md5sums'
     md5 = os.path.join('/home/factory/Avalon-extras/scripts/factory','md5sums' )
 
-    changelog = 'https://canaan.io/downloads/software/avalon821/mm/2017-12-27/changelog'
+    changelog = 'https://canaan.io/downloads/software/avalon821/mm/latest/changelog'
     changeloglocal = os.path.join('/home/factory/Avalon-extras/scripts/factory','changelog' )
 
     local = os.path.join('/home/factory/Avalon-extras/scripts/factory','MM821.mcs' )
@@ -246,10 +247,10 @@ else:
     
 
     #downloads MM821.mcs
-    url = 'https://canaan.io/downloads/software/avalon821/mm/2017-12-27/md5sums'
+    url = 'https://canaan.io/downloads/software/avalon821/mm/latest/md5sums'
     md5 = os.path.join('/home/factory/Avalon-extras/scripts/factory','md5sums' )
     
-    changelog = 'https://canaan.io/downloads/software/avalon821/mm/2017-12-27/changelog'
+    changelog = 'https://canaan.io/downloads/software/avalon821/mm/latest/changelog'
     changeloglocal = os.path.join('/home/factory/Avalon-extras/scripts/factory','changelog' )
 
     local = os.path.join('/home/factory/Avalon-extras/scripts/factory','MM821.mcs')
