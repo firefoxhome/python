@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>Message Board</title>
+</head>
+<body>
+	<h1>Message Board</h1>
+	<form action="/post" method="post">
+		<p>Please leave a message</p>
+		<table>
+			<tr>
+				<th>name</th>
+				<td>
+					<input type="text" size="20" name="name">
+				</td>
+			</tr>
+			<tr>
+				<th>leave a message</th>
+				<td>
+					<textarea rows="5" cols="40" name="comment"></textarea>
+				</td>
+			</tr>
+		</table>
+		<p><button type="submit">submit</button></p>
+	</form>
+	<div>
+		<h2>Message record</h2>
+		<h3>Visitors' message(2014/10/31 10:00:00):</h3>
+		<p>
+			message content<br>
+			message content
+		</p>
+		<h3>Visitors' message(2014/10/31 09:00:00):</h3>
+		<p>
+			message content<br>
+			message content
+		</p>
+	</div>
+</body>
+</html>
