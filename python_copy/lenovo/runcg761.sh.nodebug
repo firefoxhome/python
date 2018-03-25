@@ -1,0 +1,7 @@
+#!/bin/sh
+./cgminer/cgminer \
+    -o stratum+tcp://stratum.kano.is:3333 -O canaan.3333:1234 \
+    --api-allow W:127.0.0.1,W:192.168.1.1 \
+    --api-port 4028 \
+    --api-listen \
+     2>./cg761log

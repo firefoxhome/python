@@ -1,0 +1,17 @@
+1, 下载cgminer  git clone https://github.com/Canaan-Creative/cgminer.git
+2, cd cgminer
+
+If building on Ubuntu:
+	sudo apt-get install build-essential autoconf automake libtool pkg-config \
+                             libcurl4-openssl-dev libudev-dev libusb-1.0-0-dev \
+                             libncurses5-dev
+
+3, git checkout origin/master -b avalon7
+4, ./autogen.sh --enable-avalon7
+5, make -j 4
+
+cgminer下载同级别目录执行
+./runcg761.sh -D
+
+打开screen 
+执行 ./grep_761.sh
