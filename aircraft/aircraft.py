@@ -5,6 +5,7 @@
 #4-3 12:03  Detection keyboard
 #4-3 14:30  Control my plane to move around
 #4-3 16:03  Aircraft launching bullets
+#4-4 15:51  Display enemy aircraft
 
 import pygame
 from pygame.locals import *
@@ -13,7 +14,7 @@ class HeroPlane(object):
 
 	def __init__(self,screen):
 		self.x = 230
-		self.y = 600
+		self.y = 580
 
 		self.screen = screen
 
@@ -52,13 +53,31 @@ class Bullet(object):
 	def display(self):
 		self.screen.blit(self.image,(self.x,self.y))
 
+class EnemyPlane(object):
+
+	def __init__(self,screen):
+		self.x = 0
+		self.y = 0
+
+		self.screen = screen
+
+		self.imageName = "./enemy-1.png"
+		self.image = pygame.image.load(self.imageName).convert()
+
+		self.bulletList = []
+
+	def display(self):
+		self.screen.blit(self.image,(self.x,self.y))
+
 
 if __name__ =="__main__":
-	screen = pygame.display.set_mode((480,800),0,32)
+	screen = pygame.display.set_mode((480,650),0,32)
 
 	background = pygame.image.load("./background.png").convert()
 
 	heroPlane = HeroPlane(screen)
+
+	EnemyPlane = EnemyPlane(screen)
 
 	#hero = pygame.image.load("./hero.gif").convert()
 
@@ -69,6 +88,7 @@ if __name__ =="__main__":
 		screen.blit(background,(0,0))
 
 		heroPlane.display()
+		EnemyPlane.display()
 
 		#screen.blit(hero,(x,y))
 
