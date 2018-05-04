@@ -73,7 +73,8 @@ def check(fs,fd):
             mac =  output.read()
             #print mac
             #str = 'http://ams.b-bug.org/mac/address.py?a=%s' %mac
-            str = 'http://ams.b-bug.org/mac/?a=%s' %mac
+            #str = 'http://ams.b-bug.org/mac/?a=%s' %mac
+            str = 'http://140.143.16.230/mac/?a=%s' %mac
             
 
             print str
@@ -117,7 +118,8 @@ output = os.popen('ifconfig | grep eth | cut -c 39-65')
 mac =  output.read()
 
 #str = 'http://ams.b-bug.org/mac/address.py?a=%s' %mac
-str = 'http://ams.b-bug.org/mac/?a=%s' %mac
+#str = 'http://ams.b-bug.org/mac/?a=%s' %mac
+str = 'http://140.143.16.230/mac/?a=%s' %mac
 print "The URL is being accessed",str
 
 
@@ -249,10 +251,13 @@ else:
 mychangelog = os.popen('cat changelog | grep Version | cut -c 9-23').read()
 print mychangelog
 
-#url = str +'&b=8211712-16c14b0' + '&c=%s'%ver  
+
 url = str +'&b=%s'%mychangelog + '&c=%s'%ver 
 print url
 webbrowser.open(url, new=0, autoraise=True)
+
+
+
 
 
 
