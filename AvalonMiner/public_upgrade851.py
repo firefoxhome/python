@@ -15,7 +15,7 @@ import sys
 #Need : python2.7
 #sudo pip install beautifulsoup4
 
-#2018-2-27 11:45  841 first version+1
+#2018-5-6 10:00  851 first version+1
 
 def mymovefile(srcfile, dstfile):
 	if not os.path.isfile(srcfile):
@@ -83,10 +83,11 @@ def check(fs,fd):
             contents = page.read()  
             #print(contents)
 
-            url = 'https://canaan.io/downloads/software/avalon841/mm/latest/md5sums'
+            #url = 'https://canaan.io/downloads/software/avalon841/mm/latest/md5sums'
+            url = 'https://canaan.io/downloads/software/avalon851/mm/2018-05-03/md5sums'
             md5 = os.path.join('/home/factory/Avalon-extras/scripts/factory','md5sums' )
 
-            local = os.path.join('/home/factory/Avalon-extras/scripts/factory','MM841.mcs' )
+            local = os.path.join('/home/factory/Avalon-extras/scripts/factory','MM851.mcs' )
             urllib.urlretrieve(address,local,Schedule)
             print "****************************************************************************"
             print "Download the MD5 File"
@@ -95,16 +96,16 @@ def check(fs,fd):
 
 
             #check MD5
-            check1 = os.popen('cat md5sums | grep MM841.mcs | cut -c 1-32')
-            check2 = os.popen('md5sum MM841.mcs | cut -c 1-32')
+            check1 = os.popen('cat md5sums | grep MM851.mcs | cut -c 1-32')
+            check2 = os.popen('md5sum MM851.mcs | cut -c 1-32')
             ck1 =  check1.read()
             ck2 =  check2.read()
             #print ck1
             #print ck2
             check(ck1, ck2)
 
-        initial = '/home/factory/canaan_factory/MM841.mcs'
-        initial_bak = '/home/factory/Avalon-extras/scripts/factory/MM841.mcs'
+        initial = '/home/factory/canaan_factory/MM851.mcs'
+        initial_bak = '/home/factory/Avalon-extras/scripts/factory/MM851.mcs'
 
 
         print "Three downloads failed,Good bye!"
@@ -172,8 +173,8 @@ print "当前工作目录 : %s" % os.getcwd()
 os.system("ls")
 
 
-srcfile = '/home/factory/Avalon-extras/scripts/factory/MM841.mcs'
-dstfile = '/home/factory/canaan_factory/MM841.mcs'
+srcfile = '/home/factory/Avalon-extras/scripts/factory/MM851.mcs'
+dstfile = '/home/factory/canaan_factory/MM851.mcs'
 #Add dstfile = /home/factory/canaan_factory/MM821.mcs, solve the firmware movement is not covered.
 
 
@@ -186,13 +187,15 @@ if os.path.exists(srcfile):
     mymovefile(srcfile,dstfile)
     
     
-    url = 'https://canaan.io/downloads/software/avalon841/mm/latest/md5sums'
+    #url = 'https://canaan.io/downloads/software/avalon841/mm/latest/md5sums'
+    url = 'https://canaan.io/downloads/software/avalon851/mm/2018-05-03/md5sums'
     md5 = os.path.join('/home/factory/Avalon-extras/scripts/factory','md5sums' )
 
-    changelog = 'https://canaan.io/downloads/software/avalon841/mm/latest/changelog'
+    #changelog = 'https://canaan.io/downloads/software/avalon841/mm/latest/changelog'
+    changelog = 'https://canaan.io/downloads/software/avalon851/mm/2018-05-03/changelog'
     changeloglocal = os.path.join('/home/factory/Avalon-extras/scripts/factory','changelog' )
 
-    local = os.path.join('/home/factory/Avalon-extras/scripts/factory','MM841.mcs' )
+    local = os.path.join('/home/factory/Avalon-extras/scripts/factory','MM851.mcs' )
     urllib.urlretrieve(address,local,Schedule)
 
     print "****************************************************************************"
@@ -206,8 +209,8 @@ if os.path.exists(srcfile):
     urllib.urlretrieve(changelog,changeloglocal,Schedule)
 
 
-    check1 = os.popen('cat md5sums | grep MM841.mcs | cut -c 1-32')
-    check2 = os.popen('md5sum MM841.mcs | cut -c 1-32')
+    check1 = os.popen('cat md5sums | grep MM851.mcs | cut -c 1-32')
+    check2 = os.popen('md5sum MM851.mcs | cut -c 1-32')
     ck1 =  check1.read()
     ck2 =  check2.read()
     #print ck1
@@ -219,13 +222,15 @@ else:
     message = 'Sorry, I cannot find the "%s" file.'
     print message % srcfile
     
-    url = 'https://canaan.io/downloads/software/avalon841/mm/latest/md5sums'
+    #url = 'https://canaan.io/downloads/software/avalon841/mm/latest/md5sums'
+    url = 'https://canaan.io/downloads/software/avalon851/mm/2018-05-03/md5sums'
     md5 = os.path.join('/home/factory/Avalon-extras/scripts/factory','md5sums' )
     
-    changelog = 'https://canaan.io/downloads/software/avalon841/mm/latest/changelog'
+    #changelog = 'https://canaan.io/downloads/software/avalon841/mm/latest/changelog'
+    changelog = 'https://canaan.io/downloads/software/avalon851/mm/2018-05-03/changelog'
     changeloglocal = os.path.join('/home/factory/Avalon-extras/scripts/factory','changelog' )
 
-    local = os.path.join('/home/factory/Avalon-extras/scripts/factory','MM841.mcs')
+    local = os.path.join('/home/factory/Avalon-extras/scripts/factory','MM851.mcs')
     urllib.urlretrieve(address,local,Schedule)
 
     print "****************************************************************************"
@@ -239,8 +244,8 @@ else:
     urllib.urlretrieve(changelog,changeloglocal,Schedule)
 
 
-    check1 = os.popen('cat md5sums | grep MM841.mcs | cut -c 1-32')
-    check2 = os.popen('md5sum MM841.mcs | cut -c 1-32')
+    check1 = os.popen('cat md5sums | grep MM851.mcs | cut -c 1-32')
+    check2 = os.popen('md5sum MM851.mcs | cut -c 1-32')
     ck1 =  check1.read()
     ck2 =  check2.read()
     #print ck1
