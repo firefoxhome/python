@@ -53,8 +53,8 @@ def check(fs,fd):
             count = count + 1
             print count
 
-            #output = os.popen('ifconfig | grep eth | cut -c 39-65')
-            output = os.popen('ifconfig | grep wlan1 | cut -c 39-65')
+            output = os.popen('ifconfig | grep eth | cut -c 39-65')
+            #output = os.popen('ifconfig | grep wlan1 | cut -c 39-65')
             mac =  output.read()
             #str = 'http://ams.b-bug.org/mac/address.py?a=%s' %mac
             #str = 'http://ams.b-bug.org/mac/?a=%s' %mac
@@ -103,8 +103,8 @@ def check(fs,fd):
 
 if __name__ == '__main__':
     #Get links
-    #output = os.popen('ifconfig | grep eth | cut -c 39-56')
-    output = os.popen('ifconfig | grep wlan1 | cut -c 39-65')
+    output = os.popen('ifconfig | grep eth | cut -c 39-56')
+    #output = os.popen('ifconfig | grep wlan1 | cut -c 39-65')
     mac =  output.read()
     #str = 'http://ams.b-bug.org/mac/address.py?a=%s' %mac
     #str = 'http://ams.b-bug.org/mac/?a=%s' %mac
