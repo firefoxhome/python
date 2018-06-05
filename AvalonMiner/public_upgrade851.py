@@ -73,8 +73,9 @@ def check(fs,fd):
             mac =  output.read()
             #print mac
             #str = 'http://ams.b-bug.org/mac/address.py?a=%s' %mac
-            #str = 'http://ams.b-bug.org/mac/?a=%s' %mac
-            str = 'http://140.143.16.230/mac/?a=%s' %mac
+            str = 'http://p.canaan-creative.com/mac/?a=%s' %mac
+            #str = 'http://140.143.16.230/mac/?a=%s' %mac
+
             
 
             print str
@@ -119,8 +120,8 @@ output = os.popen('ifconfig | grep eth | cut -c 39-65')
 mac =  output.read()
 
 #str = 'http://ams.b-bug.org/mac/address.py?a=%s' %mac
-#str = 'http://ams.b-bug.org/mac/?a=%s' %mac
-str = 'http://140.143.16.230/mac/?a=%s' %mac
+str = 'http://p.canaan-creative.com/mac/?a=%s' %mac
+#str = 'http://140.143.16.230/mac/?a=%s' %mac
 print "The URL is being accessed",str
 
 
