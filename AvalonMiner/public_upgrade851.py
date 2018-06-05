@@ -16,6 +16,7 @@ import sys
 #sudo pip install beautifulsoup4
 
 #2018-5-6 10:00  851 first version+1
+#2018-6-5 14:15  change code 
 
 def mymovefile(srcfile, dstfile):
 	if not os.path.isfile(srcfile):
