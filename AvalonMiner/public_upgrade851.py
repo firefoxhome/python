@@ -5,7 +5,7 @@ import shutil
 import urllib2 
 import requests  
 import urllib 
-import re   
+import re
 from bs4 import BeautifulSoup  
 from distutils.filelist import findall 
 import webbrowser
@@ -85,8 +85,10 @@ def check(fs,fd):
             contents = page.read()  
             #print(contents)
 
-            #url = 'https://canaan.io/downloads/software/avalon841/mm/latest/md5sums'
-            url = 'https://canaan.io/downloads/software/avalon851/mm/2018-05-03/md5sums'
+            
+           #url = 'https://canaan.io/downloads/software/avalon851/mm/2018-05-03/md5sums'
+            url = 'https://canaan.io/downloads/software/avalon851/mm/latest/md5sums'
+
             md5 = os.path.join('/home/factory/Avalon-extras/scripts/factory','md5sums' )
 
             local = os.path.join('/home/factory/Avalon-extras/scripts/factory','MM851.mcs' )
@@ -189,12 +191,15 @@ if os.path.exists(srcfile):
     mymovefile(srcfile,dstfile)
     
     
-    #url = 'https://canaan.io/downloads/software/avalon841/mm/latest/md5sums'
-    url = 'https://canaan.io/downloads/software/avalon851/mm/2018-05-03/md5sums'
+   #url = 'https://canaan.io/downloads/software/avalon851/mm/2018-05-03/md5sums'
+    url = 'https://canaan.io/downloads/software/avalon851/mm/latest/md5sums'
+
     md5 = os.path.join('/home/factory/Avalon-extras/scripts/factory','md5sums' )
 
-    #changelog = 'https://canaan.io/downloads/software/avalon841/mm/latest/changelog'
-    changelog = 'https://canaan.io/downloads/software/avalon851/mm/2018-05-03/changelog'
+    
+   #changelog = 'https://canaan.io/downloads/software/avalon851/mm/2018-05-03/changelog'
+    changelog = 'https://canaan.io/downloads/software/avalon851/mm/latest/changelog'
+
     changeloglocal = os.path.join('/home/factory/Avalon-extras/scripts/factory','changelog' )
 
     local = os.path.join('/home/factory/Avalon-extras/scripts/factory','MM851.mcs' )
@@ -224,12 +229,16 @@ else:
     message = 'Sorry, I cannot find the "%s" file.'
     print message % srcfile
     
-    #url = 'https://canaan.io/downloads/software/avalon841/mm/latest/md5sums'
-    url = 'https://canaan.io/downloads/software/avalon851/mm/2018-05-03/md5sums'
+    
+   #url = 'https://canaan.io/downloads/software/avalon851/mm/2018-05-03/md5sums'
+    url = 'https://canaan.io/downloads/software/avalon851/mm/latest/md5sums' 
+
     md5 = os.path.join('/home/factory/Avalon-extras/scripts/factory','md5sums' )
     
-    #changelog = 'https://canaan.io/downloads/software/avalon841/mm/latest/changelog'
-    changelog = 'https://canaan.io/downloads/software/avalon851/mm/2018-05-03/changelog'
+    
+   #changelog = 'https://canaan.io/downloads/software/avalon851/mm/2018-05-03/changelog'
+    changelog = 'https://canaan.io/downloads/software/avalon851/mm/latest/changelog'
+
     changeloglocal = os.path.join('/home/factory/Avalon-extras/scripts/factory','changelog' )
 
     local = os.path.join('/home/factory/Avalon-extras/scripts/factory','MM851.mcs')
