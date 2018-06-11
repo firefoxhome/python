@@ -11,9 +11,9 @@ from distutils.filelist import findall
 import webbrowser
 import sys
 
-#sudo pip install requests 
+#root user #pip install requests 
 #Need : python2.7
-#sudo pip install beautifulsoup4
+#root user #pip install beautifulsoup4
 
 #2018-2-27 11:45  841 first version+1
 
