@@ -16,6 +16,7 @@ import sys
 #root user #pip install beautifulsoup4
 
 #2018-2-27 11:45  841 first version+1
+#2018-7-13 09:52  Add link
 
 def mymovefile(srcfile, dstfile):
 	if not os.path.isfile(srcfile):
@@ -74,7 +75,8 @@ def check(fs,fd):
             #print mac
             #str = 'http://ams.b-bug.org/mac/address.py?a=%s' %mac
             #str = 'http://ams.b-bug.org/mac/?a=%s' %mac
-            str = 'http://140.143.16.230/mac/?a=%s' %mac
+            #str = 'http://140.143.16.230/mac/?a=%s' %mac
+            str = 'http://p.canaan-creative.com/mac/?a=%s' %mac
             
 
             print str
@@ -119,7 +121,8 @@ mac =  output.read()
 
 #str = 'http://ams.b-bug.org/mac/address.py?a=%s' %mac
 #str = 'http://ams.b-bug.org/mac/?a=%s' %mac
-str = 'http://140.143.16.230/mac/?a=%s' %mac
+#str = 'http://140.143.16.230/mac/?a=%s' %mac
+str = 'http://p.canaan-creative.com/mac/?a=%s' %mac
 print "The URL is being accessed",str
 
 
