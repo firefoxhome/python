@@ -57,7 +57,6 @@ def check(fs,fd):
             #output = os.popen('ifconfig | grep wlan1 | cut -c 39-65')
             mac =  output.read()
             #str = 'http://ams.b-bug.org/mac/address.py?a=%s' %mac
-            #str = 'http://ams.b-bug.org/mac/?a=%s' %mac
             #str = 'http://140.143.16.230/mac/?a=%s' %mac
             str = 'http://p.canaan-creative.com/mac/?a=%s' %mac
             
@@ -178,12 +177,12 @@ if __name__ == '__main__':
         
 
         #downloads MM821.mcs
-        #url = 'https://canaan.io/downloads/software/avalon821/pmu/latest/md5sums'
         url = 'https://canaan.io/downloads/software/avalon851/pmu/latest/md5sums'
         md5 = os.path.join('/home/factory/Avalon-extras/scripts/factory','md5sums' )
 
         #changelog = 'https://canaan.io/downloads/software/avalon821/mm/latest/changelog'
-        #changeloglocal = os.path.join('/home/factory/Avalon-extras/scripts/factory','changelog' )
+        changelog = 'https://canaan.io/downloads/software/avalon851/pmu/latest/changelog'
+        changeloglocal = os.path.join('/home/factory/Avalon-extras/scripts/factory','changelog' )
 
         local = os.path.join('/home/factory/Avalon-extras/scripts/factory','pmu851.axf' )
         urllib.urlretrieve(address,local,Schedule)
@@ -212,12 +211,12 @@ if __name__ == '__main__':
         message = 'Sorry, I cannot find the "%s" file.'
         print message % srcfile
         
-        #url = 'https://canaan.io/downloads/software/avalon821/pmu/latest/md5sums'
         url = 'https://canaan.io/downloads/software/avalon851/pmu/latest/md5sums'
         md5 = os.path.join('/home/factory/Avalon-extras/scripts/factory','md5sums' )
         
         #changelog = 'https://canaan.io/downloads/software/avalon821/mm/latest/changelog'
-        #changeloglocal = os.path.join('/home/factory/Avalon-extras/scripts/factory','changelog' )
+        changelog = 'https://canaan.io/downloads/software/avalon851/pmu/latest/changelog'
+        changeloglocal = os.path.join('/home/factory/Avalon-extras/scripts/factory','changelog' )
 
         local = os.path.join('/home/factory/Avalon-extras/scripts/factory','pmu851.axf')
         urllib.urlretrieve(address,local,Schedule)
