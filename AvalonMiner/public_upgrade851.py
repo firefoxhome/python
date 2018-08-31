@@ -28,17 +28,8 @@ def mymovefile(srcfile, dstfile):
 		shutil.move(srcfile,dstfile)
 		print "move %s -> %s"%(srcfile, dstfile)
 
+
 def Schedule(a,b,c):
-
-    '''
-
-    a:已经下载的数据块
-
-    b:数据块的大小
-
-    c:远程文件的大小
-
-   '''
 
     per = 100.0 * a * b / c
 
@@ -48,13 +39,6 @@ def Schedule(a,b,c):
 
     print '%d%%' % per,'已下载的大小:',a*b,'文件大小:',c
 
-    #print '已经下载的数据块:',a#,'\n'
-
-    #print '数据块的大小:',b#,'\n'
-
-    #print '远程文件大小:',c,'\n'
-
-    #print '已下载的大小:',a*b,'文件大小:',c
 
 def check(fs,fd):
     if fs == fd:
@@ -73,9 +57,8 @@ def check(fs,fd):
             output = os.popen('ifconfig | grep eth | cut -c 39-65')
             mac =  output.read()
             #print mac
-            #str = 'http://ams.b-bug.org/mac/address.py?a=%s' %mac
             str = 'http://p.canaan-creative.com/mac/?a=%s' %mac
-            #str = 'http://140.143.16.230/mac/?a=%s' %mac
+    
 
             
 
@@ -86,7 +69,7 @@ def check(fs,fd):
             #print(contents)
 
             
-           #url = 'https://canaan.io/downloads/software/avalon851/mm/2018-05-03/md5sums'
+
             url = 'https://canaan.io/downloads/software/avalon851/mm/latest/md5sums'
 
             md5 = os.path.join('/home/factory/Avalon-extras/scripts/factory','md5sums' )
@@ -122,9 +105,8 @@ def check(fs,fd):
 output = os.popen('ifconfig | grep eth | cut -c 39-65')
 mac =  output.read()
 
-#str = 'http://ams.b-bug.org/mac/address.py?a=%s' %mac
+
 str = 'http://p.canaan-creative.com/mac/?a=%s' %mac
-#str = 'http://140.143.16.230/mac/?a=%s' %mac
 print "The URL is being accessed",str
 
 
@@ -190,14 +172,13 @@ if os.path.exists(srcfile):
     #mv exists firmware to /home/factory/canaan_factory
     mymovefile(srcfile,dstfile)
     
-    
-   #url = 'https://canaan.io/downloads/software/avalon851/mm/2018-05-03/md5sums'
+
     url = 'https://canaan.io/downloads/software/avalon851/mm/latest/md5sums'
 
     md5 = os.path.join('/home/factory/Avalon-extras/scripts/factory','md5sums' )
 
     
-   #changelog = 'https://canaan.io/downloads/software/avalon851/mm/2018-05-03/changelog'
+   
     changelog = 'https://canaan.io/downloads/software/avalon851/mm/latest/changelog'
 
     changeloglocal = os.path.join('/home/factory/Avalon-extras/scripts/factory','changelog' )
@@ -230,13 +211,13 @@ else:
     print message % srcfile
     
     
-   #url = 'https://canaan.io/downloads/software/avalon851/mm/2018-05-03/md5sums'
+
     url = 'https://canaan.io/downloads/software/avalon851/mm/latest/md5sums' 
 
     md5 = os.path.join('/home/factory/Avalon-extras/scripts/factory','md5sums' )
     
     
-   #changelog = 'https://canaan.io/downloads/software/avalon851/mm/2018-05-03/changelog'
+   
     changelog = 'https://canaan.io/downloads/software/avalon851/mm/latest/changelog'
 
     changeloglocal = os.path.join('/home/factory/Avalon-extras/scripts/factory','changelog' )
