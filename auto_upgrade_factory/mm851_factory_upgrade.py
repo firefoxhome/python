@@ -20,7 +20,7 @@ import subprocess
 #sudo pip install beautifulsoup4
 #sudo pip install wget
 
-#2018-9-6 16:20  The first version of the factory upgrade.
+#2018-9-12 13:28  The MM851 first version of the factory upgrade.
 
 
 
@@ -132,8 +132,8 @@ def check(fs,fd):
             if count == 2:
                 break
 
-        initial = '/home/factory/canaan_factory/pmu851.axf'
-        initial_bak = '/home/factory/Avalon-extras/scripts/factory/pmu851.axf'
+        initial = '/home/factory/canaan_factory/MM851.mcs'
+        initial_bak = '/home/factory/Avalon-extras/scripts/factory/MM851.mcs'
 
 
         print "Three downloads failed,Good bye!"
