@@ -22,6 +22,7 @@ import subprocess
 
 #2018-9-12 13:20  The MM921 first version of the factory upgrade.
 #2018-9-13 13:43  change code
+#2018-9-13 21:02  Add folder to judge
 
 
 def mymovefile(srcfile, dstfile):
@@ -50,7 +51,6 @@ def burnmodel(address):
 def md5sums_download(address):
     md5sum_address = address + 'md5sums'
     print md5sum_address
-    md5sum_local = os.path.join('/home/factory/Avalon-extras/scripts/factory','md5sums' )
 
     out_fname = 'md5sums'
     wget.download(md5sum_address, out=out_fname)
@@ -59,7 +59,6 @@ def md5sums_download(address):
 def changelog_download(address):
     changelog_address = address + 'changelog'
     print changelog_address
-    changelog_local = os.path.join('/home/factory/Avalon-extras/scripts/factory','changelog' )
 
     out_fname = 'changelog'
     wget.download(changelog_address, out=out_fname)
@@ -196,28 +195,25 @@ if __name__ == '__main__':
     if not os.path.exists(srcfile):
         print "%s not exists!"%(srcfile)
         path = "/home/factory/canaan_changelog"
-        os.makedirs( path, 0777 );
+        os.makedirs( path,0755)
         print  "New changelog placed directory successfully"
     else:
-        os.chdir('/home/factory/canaan_changelog')
         print  "Entry into /home/factory/canaan_changelog"
 
-
+    os.chdir('/home/factory/canaan_changelog')
     changelogaddress = address + 'changelog'
     print changelogaddress
 
 
-
-    changeloglocal = os.path.join('/home/factory/canaan_changelog','changelog' )
-
-    out_fname = 'changelog'
+    out_fname = 'changelog.log'
     wget.download(changelogaddress, out=out_fname)
+    print "**************************"
 
     print "当前工作目录 : %s" % os.getcwd()
     os.system("ls")
 
 
-    check1 = os.popen('cat changelog | grep Version | cut -c 9-23').read()
+    check1 = os.popen('cat changelog.log | grep Version | cut -c 9-23').read()
     print "---------------"
     print check1
     print "---------------"
@@ -235,10 +231,12 @@ if __name__ == '__main__':
 
     if check1 == check2:
         print "Firmware version is up to date."
+        os.system('rm -rf /home/factory/canaan_changelog')
         exit(0)
         print "-------------Error------------------"
     else:
         print "Firmware version is not up to date. Please download again"
+        os.system('rm -rf /home/factory/canaan_changelog')
 
 
 
