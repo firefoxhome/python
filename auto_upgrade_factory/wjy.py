@@ -24,7 +24,7 @@ import subprocess
 #2018-9-13 13:43  change code
 #2018-9-13 21:02  Add folder to judge
 #2018-9-14 15:32  Add function and delete note
-
+#2018-9-14 21:13  Apple
 
 def mymovefile(srcfile, dstfile):
     if not os.path.isfile(srcfile):
@@ -35,6 +35,28 @@ def mymovefile(srcfile, dstfile):
             os.makedirs(fpath)
         shutil.move(srcfile,dstfile)
         print "move %s -> %s"%(srcfile, dstfile)
+
+
+def foldercheck(srcfile):
+    if not os.path.exists(srcfile):
+        print "%s not exists!"%(srcfile)
+        path = "/home/factory/canaan_changelog"
+        os.makedirs( path,0755)
+        print  "New changelog placed directory successfully"
+    else:
+        print  "Entry into /home/factory/canaan_changelog"
+
+
+def changelogcheck(check1,check2):
+    if check1 == check2:
+        print "Firmware version is up to date."
+        os.system('rm -rf /home/factory/canaan_changelog')
+        exit(0)
+        print "-------------Error------------------"
+    else:
+        print "Firmware version is not up to date. Please download again"
+        os.system('rm -rf /home/factory/canaan_changelog')
+
 
 
 def minermodel(address):
@@ -121,7 +143,6 @@ def check(fs,fd):
 
             MM921_address = address + 'MM921.mcs'
             print MM921_address
-            MM921_local = os.path.join('/home/factory/Avalon-extras/scripts/factory','MM921.mcs' )
 
             out_fname = 'MM921.mcs'
             wget.download(MM921_address, out=out_fname)
@@ -178,7 +199,9 @@ if __name__ == '__main__':
 
 
     srcfile = '/home/factory/canaan_changelog'
+    foldercheck(srcfile)
 
+    '''
     if not os.path.exists(srcfile):
         print "%s not exists!"%(srcfile)
         path = "/home/factory/canaan_changelog"
@@ -186,6 +209,7 @@ if __name__ == '__main__':
         print  "New changelog placed directory successfully"
     else:
         print  "Entry into /home/factory/canaan_changelog"
+    '''
 
     os.chdir('/home/factory/canaan_changelog')
     changelogaddress = address + 'changelog'
@@ -194,7 +218,7 @@ if __name__ == '__main__':
 
     out_fname = 'changelog.log'
     wget.download(changelogaddress, out=out_fname)
-    print "**************************"
+    print "**************************-----------------------------------**********************"
 
     print "当前工作目录 : %s" % os.getcwd()
     os.system("ls")
@@ -216,6 +240,9 @@ if __name__ == '__main__':
     print check2
     print "--------------"
 
+    changelogcheck(check1,check2)
+
+    '''
     if check1 == check2:
         print "Firmware version is up to date."
         os.system('rm -rf /home/factory/canaan_changelog')
@@ -224,8 +251,7 @@ if __name__ == '__main__':
     else:
         print "Firmware version is not up to date. Please download again"
         os.system('rm -rf /home/factory/canaan_changelog')
-
-
+    '''
 
     os.chdir('/home/factory/Avalon-extras')
     fd = os.open("version",os.O_RDWR)
@@ -238,7 +264,6 @@ if __name__ == '__main__':
 
     if ver == net_ver:
         print "The version is already the latest"
-
     else:
         print "The version is not the latest"
 
@@ -262,17 +287,13 @@ if __name__ == '__main__':
         changelog_initial_bak = '/home/factory/Avalon-extras/scripts/factory/changelog'
 
         mymovefile(changelog_initial_bak,changelog_initial)
-
         changelog_download(address)
-
 
 
         md5sum_initial = '/home/factory/canaan_factory/md5sums'
         md5sum_initial_bak = '/home/factory/Avalon-extras/scripts/factory/md5sums'
 
         mymovefile(md5sum_initial_bak,md5sum_initial)
-
-
         md5sums_download(address)
 
         MM921_initial = '/home/factory/canaan_factory/MM921.mcs'
@@ -306,16 +327,13 @@ if __name__ == '__main__':
         changelog_initial_bak = '/home/factory/Avalon-extras/scripts/factory/changelog'
 
         mymovefile(changelog_initial_bak,changelog_initial)
-
         changelog_download(address)
-
 
 
         md5sum_initial = '/home/factory/canaan_factory/md5sums'
         md5sum_initial_bak = '/home/factory/Avalon-extras/scripts/factory/md5sums'
 
         mymovefile(md5sum_initial_bak,md5sum_initial)
-
         md5sums_download(address)
 
         MM921_initial = '/home/factory/canaan_factory/MM921.mcs'
@@ -325,7 +343,7 @@ if __name__ == '__main__':
 
         MM921_address = address + 'MM921.mcs'
         print MM921_address
-        MM921_local = os.path.join('/home/factory/Avalon-extras/scripts/factory','MM921.mcs' )
+
 
         out_fname = 'MM921.mcs'
         wget.download(MM921_address, out=out_fname)
