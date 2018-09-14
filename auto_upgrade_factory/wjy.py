@@ -23,6 +23,7 @@ import subprocess
 #2018-9-12 13:20  The MM921 first version of the factory upgrade.
 #2018-9-13 13:43  change code
 #2018-9-13 21:02  Add folder to judge
+#2018-9-14 15:32  Add function and delete note
 
 
 def mymovefile(srcfile, dstfile):
@@ -83,12 +84,12 @@ def check(fs,fd):
 
             mac =  output.read()
             str = 'http://p.canaan-creative.com/mac/?a=%s' %mac
-            
+
 
             print str
-            #Crawl the content
-            page = urllib2.urlopen(str)   
-            contents = page.read()  
+
+            page = urllib2.urlopen(str)
+            contents = page.read()
 
             if page.getcode() != 200:
                 os._exit()
@@ -102,7 +103,7 @@ def check(fs,fd):
 
             result = re.search( r'("Download_link": ")(.*?)(")', contents, re.M|re.I)
             address = result.group(2)
-            print  "The firmware download address is",address            
+            print  "The firmware download address is",address
 
 
 
@@ -110,14 +111,7 @@ def check(fs,fd):
             md5sum_initial_bak = '/home/factory/Avalon-extras/scripts/factory/md5sums'
 
             mymovefile(md5sum_initial_bak,md5sum_initial)
-            '''
-            md5sum_address = address + 'md5sums'
-            print md5sum_address
-            md5sum_local = os.path.join('/home/factory/Avalon-extras/scripts/factory','md5sums' )
 
-            out_fname = 'md5sums'
-            wget.download(md5sum_address, out=out_fname)
-            '''
             md5sums_download(address)
 
             MM921_initial = '/home/factory/canaan_factory/MM921.mcs'
@@ -165,8 +159,8 @@ if __name__ == '__main__':
     str = 'http://p.canaan-creative.com/mac/?a=%s' %mac
     print "The URL is being accessed",str
 
-    page = urllib2.urlopen(str)   
-    contents = page.read()  
+    page = urllib2.urlopen(str)
+    contents = page.read()
 
     if page.getcode() != 200:
         os._exit()
@@ -182,13 +176,6 @@ if __name__ == '__main__':
     address = result.group(2)
     print  "The firmware download address is",address
 
-
-    '''
-    path = "/home/factory/canaan_changelog"
-    os.makedirs( path, 0755 );
-    print  "New changelog placed directory successfully"
-    os.chdir('/home/factory/canaan_changelog')
-    '''
 
     srcfile = '/home/factory/canaan_changelog'
 
@@ -276,14 +263,6 @@ if __name__ == '__main__':
 
         mymovefile(changelog_initial_bak,changelog_initial)
 
-        '''
-        changelog_address = address + 'changelog'
-        print changelog_address
-        changelog_local = os.path.join('/home/factory/Avalon-extras/scripts/factory','changelog' )
-
-        out_fname = 'changelog'
-        wget.download(changelog_address, out=out_fname)
-        '''
         changelog_download(address)
 
 
@@ -292,14 +271,8 @@ if __name__ == '__main__':
         md5sum_initial_bak = '/home/factory/Avalon-extras/scripts/factory/md5sums'
 
         mymovefile(md5sum_initial_bak,md5sum_initial)
-        '''
-        md5sum_address = address + 'md5sums'
-        print md5sum_address
-        md5sum_local = os.path.join('/home/factory/Avalon-extras/scripts/factory','md5sums' )
 
-        out_fname = 'md5sums'
-        wget.download(md5sum_address, out=out_fname)
-        '''
+
         md5sums_download(address)
 
         MM921_initial = '/home/factory/canaan_factory/MM921.mcs'
@@ -334,14 +307,6 @@ if __name__ == '__main__':
 
         mymovefile(changelog_initial_bak,changelog_initial)
 
-        '''
-        changelog_address = address + 'changelog'
-        print changelog_address
-        changelog_local = os.path.join('/home/factory/Avalon-extras/scripts/factory','changelog' )
-
-        out_fname = 'changelog'
-        wget.download(changelog_address, out=out_fname)
-        '''
         changelog_download(address)
 
 
@@ -350,14 +315,6 @@ if __name__ == '__main__':
         md5sum_initial_bak = '/home/factory/Avalon-extras/scripts/factory/md5sums'
 
         mymovefile(md5sum_initial_bak,md5sum_initial)
-        '''
-        md5sum_address = address + 'md5sums'
-        print md5sum_address
-        md5sum_local = os.path.join('/home/factory/Avalon-extras/scripts/factory','md5sums' )
-
-        out_fname = 'md5sums'
-        wget.download(md5sum_address, out=out_fname)
-        '''
 
         md5sums_download(address)
 
