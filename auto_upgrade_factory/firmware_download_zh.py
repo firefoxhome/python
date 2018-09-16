@@ -15,6 +15,7 @@ import wget
 import os.path
 import subprocess
 
+#2018-9-16 20:00  Firmware upgrade first version
 
 def foldercheck(srcfile):
     if not os.path.exists(srcfile):
@@ -94,6 +95,15 @@ def burnmodel(address):
     burnmodel = output.read()
     print "安装的固件名字是 ",burnmodel
     return burnmodel
+
+
+
+def checkfirmware():
+    if fs == fd:
+        print "MD5 Right"
+        print "Firmware download successed"
+    else:
+        print "MD5 Error,Please download it again"
 
 
 def check(fs,fd):
@@ -195,8 +205,8 @@ else:
 
 print "服务器端获取的内容是",contents
 
-print 'http header:/n', page.info() 
-print 'http status:', page.getcode() 
+#print 'http header:/n', page.info() 
+#print 'http status:', page.getcode() 
 
 result = re.search( r'("Download_link": ")(.*?)(")', contents, re.M|re.I)
 address = result.group(2)
@@ -277,7 +287,7 @@ if miner == 'avalon921':
         ck4 =  check4.read()
         print ck3
         print ck4
-        #check(ck3,ck4)
+        checkfirmware()
     elif model == 'pmu':
         print "This is avalon921 pmu firmware"
         os.chdir('/home/factory/Avalon-extras/scripts/factory')
@@ -311,7 +321,7 @@ if miner == 'avalon921':
         ck4 =  check4.read()
         print ck3
         print ck4
-        #check(ck3,ck4)
+        checkfirmware()
     else:
         print "--------------Error----------------------------------------"
 
