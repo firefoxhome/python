@@ -5,5 +5,5 @@ Type=Application
 Terminal=false
 Icon[en_US]=gnome-panel-launcher
 Exec=gnome-terminal -e /home/factory/python/auto_upgrade_factory/firmware_download_zh.py
-Name[en_US]=Avalon851_mm_upgrade
+Name[en_US]=firmware_download
 Icon=gnome-panel-launcher
