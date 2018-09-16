@@ -25,6 +25,7 @@ import subprocess
 #2018-9-13 21:02  Add folder to judge
 #2018-9-14 15:32  Add function and delete note
 #2018-9-14 21:13  Apple
+#2018-9-16 13:59  Add versioncheck funtion
 
 def mymovefile(srcfile, dstfile):
     if not os.path.isfile(srcfile):
@@ -57,6 +58,23 @@ def changelogcheck(check1,check2):
         print "Firmware version is not up to date. Please download again"
         os.system('rm -rf /home/factory/canaan_changelog')
 
+
+def versioncheck():
+    os.chdir('/home/factory/Avalon-extras')
+    fd = os.open("version",os.O_RDWR)
+    ver = os.read(fd,4)
+    print "当前仓库脚本版本是",ver
+
+    result = re.search( r'("script_version": ")(.*?)(")', contents, re.M|re.I)
+    net_ver = result.group(2)
+    print "服务器端当前仓库版本是",net_ver
+
+    if ver == net_ver:
+        print "本地仓库版本已经是最新的"
+    else:
+        print "本地仓库版本不是最新的"
+
+    return ver
 
 
 def minermodel(address):
@@ -253,6 +271,7 @@ if __name__ == '__main__':
         os.system('rm -rf /home/factory/canaan_changelog')
     '''
 
+    '''
     os.chdir('/home/factory/Avalon-extras')
     fd = os.open("version",os.O_RDWR)
     ver = os.read(fd,4)
@@ -266,6 +285,8 @@ if __name__ == '__main__':
         print "The version is already the latest"
     else:
         print "The version is not the latest"
+
+    '''
 
 
     os.chdir('/home/factory/Avalon-extras/scripts/factory')
@@ -357,8 +378,13 @@ if __name__ == '__main__':
         print ck4   
         check(ck3,ck4)
 
+
+os.chdir('/home/factory/Avalon-extras/scripts/factory')
 mychangelog = os.popen('cat changelog | grep Version | cut -c 9-23').read()
 print mychangelog
+
+ver = versioncheck()
+
 
 url = str +'&b=%s'%mychangelog + '&c=%s'%ver 
 print url
