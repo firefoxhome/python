@@ -16,10 +16,11 @@ import os.path
 import subprocess
 
 #2018-9-16 20:00  Firmware upgrade first version
+#2018-9-16 20:51  Add check firmware funtion and add chinese 
 
 def foldercheck(srcfile):
     if not os.path.exists(srcfile):
-        print "%s 不存在!"%(srcfile)
+        print "%s 目录不存在!"%(srcfile)
         path = "/home/factory/canaan_changelog"
         os.makedirs( path,0755)
         print  "canaan_changelog目录创建成功"
@@ -86,24 +87,24 @@ def changelog_download(address):
 def minermodel(address):
     output = os.popen("echo %s | awk -F '/' '{ print $6 }' " % address)
     minermodel = output.read()
-    print "矿机型号是 ",minermodel
+    print "本次安装的矿机型号是 ",minermodel
     return minermodel
 
 
 def burnmodel(address):
     output = os.popen("echo %s | awk -F '/' '{print $7}' " % address)
     burnmodel = output.read()
-    print "安装的固件名字是 ",burnmodel
+    print "本次安装的固件名字是 ",burnmodel
     return burnmodel
 
 
 
-def checkfirmware():
+def checkfirmware(fs,fd):
     if fs == fd:
-        print "MD5 Right"
-        print "Firmware download successed"
+        print "md5sums 校验正确"
+        print "固件下载成功"
     else:
-        print "MD5 Error,Please download it again"
+        print "md5sums 校验错误，请联系北京工程师解决"
 
 
 def check(fs,fd):
@@ -137,8 +138,8 @@ def check(fs,fd):
 
             print "The content of the obtained web page is",contents
 
-            print 'http header:/n', page.info() 
-            print 'http status:', page.getcode() 
+            #print 'http header:/n', page.info() 
+            #print 'http status:', page.getcode() 
 
             result = re.search( r'("Download_link": ")(.*?)(")', contents, re.M|re.I)
             address = result.group(2)
@@ -193,7 +194,7 @@ output = os.popen('ifconfig | grep eth | cut -c 39-65')
 mac =  output.read()
 
 str = 'http://p.canaan-creative.com/mac/?a=%s' %mac
-print "服务器端的访问链接是",str
+print "服务器的访问链接是",str
 
 page = urllib2.urlopen(str)
 contents = page.read()
@@ -201,9 +202,9 @@ contents = page.read()
 if page.getcode() != 200:
     os._exit()
 else:
-    print "可以获取服务器链接"
+    print "服务器链接访问成功"
 
-print "服务器端获取的内容是",contents
+print "从服务器端获取的内容是",contents
 
 #print 'http header:/n', page.info() 
 #print 'http status:', page.getcode() 
@@ -212,6 +213,7 @@ result = re.search( r'("Download_link": ")(.*?)(")', contents, re.M|re.I)
 address = result.group(2)
 print  "固件下载目录是",address
 
+ver = versioncheck()
 
 srcfile = '/home/factory/canaan_changelog'
 foldercheck(srcfile)
@@ -287,7 +289,7 @@ if miner == 'avalon921':
         ck4 =  check4.read()
         print ck3
         print ck4
-        checkfirmware()
+        checkfirmware(ck3,ck4)
     elif model == 'pmu':
         print "This is avalon921 pmu firmware"
         os.chdir('/home/factory/Avalon-extras/scripts/factory')
@@ -321,16 +323,16 @@ if miner == 'avalon921':
         ck4 =  check4.read()
         print ck3
         print ck4
-        checkfirmware()
+        checkfirmware(ck3,ck4)
     else:
         print "--------------Error----------------------------------------"
 
 
 os.chdir('/home/factory/Avalon-extras/scripts/factory')
 mychangelog = os.popen('cat changelog | grep Version | cut -c 9-23').read()
-print mychangelog
+print "当前电脑固件版本是",mychangelog
 
-ver = versioncheck()
+
 
 
 url = str +'&b=%s'%mychangelog + '&c=%s'%ver 
