@@ -15,12 +15,12 @@ import wget
 import os.path
 import subprocess
 
-#sudo pip install requests 
+#sudo pip install requests
 #Need : python2.7
 #sudo pip install beautifulsoup4
 #sudo pip install wget
 
-#2018-9-12 13:20  The MM921 first version of the factory upgrade.
+#2018-9-12 13:20  The MM921 first version of the factory upgrade
 #2018-9-13 13:43  change code
 #2018-9-13 21:02  Add folder to judge
 #2018-9-14 15:32  Add function and delete note

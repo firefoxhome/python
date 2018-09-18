@@ -15,8 +15,14 @@ import wget
 import os.path
 import subprocess
 
+#sudo pip install requests 
+#Need : python2.7
+#sudo pip install beautifulsoup4
+#sudo pip install wget
+
 #2018-9-16 20:00  Firmware upgrade first version
 #2018-9-16 20:51  Add check firmware funtion and add chinese 
+#2018-9-17 09:52  Add 851 upgrde funtion
 
 def foldercheck(srcfile):
     if not os.path.exists(srcfile):
@@ -30,7 +36,7 @@ def foldercheck(srcfile):
 
 def changelogcheck(check1,check2):
     if check1 == check2:
-        print "固件版本已经是最新的"
+        print "固件版本已经是最新的,升级结束"
         os.system('rm -rf /home/factory/canaan_changelog')
         exit(0)
         print "-------------Error------------------"
@@ -190,149 +196,223 @@ def check(fs,fd):
         os._exit()
 
 
-output = os.popen('ifconfig | grep eth | cut -c 39-65')
-mac =  output.read()
+if __name__ == '__main__':
+    output = os.popen('ifconfig | grep eth | cut -c 39-65')
+    mac =  output.read()
 
-str = 'http://p.canaan-creative.com/mac/?a=%s' %mac
-print "服务器的访问链接是",str
+    str = 'http://p.canaan-creative.com/mac/?a=%s' %mac
+    print "服务器的访问链接是",str
 
-page = urllib2.urlopen(str)
-contents = page.read()
+    page = urllib2.urlopen(str)
+    contents = page.read()
 
-if page.getcode() != 200:
-    os._exit()
-else:
-    print "服务器链接访问成功"
-
-print "从服务器端获取的内容是",contents
-
-#print 'http header:/n', page.info() 
-#print 'http status:', page.getcode() 
-
-result = re.search( r'("Download_link": ")(.*?)(")', contents, re.M|re.I)
-address = result.group(2)
-print  "固件下载目录是",address
-
-ver = versioncheck()
-
-srcfile = '/home/factory/canaan_changelog'
-foldercheck(srcfile)
-
-
-os.chdir('/home/factory/canaan_changelog')
-changelogaddress = address + 'changelog'
-print changelogaddress
-
-out_fname = 'changelog.log'
-wget.download(changelogaddress, out=out_fname)
-print "**************************-----------------------------------**********************"
-
-print "当前工作目录 : %s" % os.getcwd()
-os.system("ls")
-
-check1 = os.popen('cat changelog.log | grep Version | cut -c 9-23').read()
-print "---------------"
-print check1
-print "---------------"
-
-os.chdir('/home/factory/Avalon-extras/scripts/factory')
-print "当前工作目录 : %s" % os.getcwd()
-os.system("ls")
-
-check2 = os.popen('cat changelog | grep Version | cut -c 9-21').read()
-#check2 = os.popen('cat changelog | grep Version | cut -c 9-23').read()
-
-print "--------------"
-print check2
-print "--------------"
-
-changelogcheck(check1,check2)
-
-
-miner = minermodel(address).strip()
-model = burnmodel(address).strip()
-
-
-if miner == 'avalon921':
-    print "This is avalon921 miner"
-    if model == 'mm':
-        print "This is avalon921 MM firmware"
-        os.chdir('/home/factory/Avalon-extras/scripts/factory')
-        global address
-        md5sum_initial = '/home/factory/canaan_factory/md5sums'
-        md5sum_initial_bak = '/home/factory/Avalon-extras/scripts/factory/md5sums'
-
-        mymovefile(md5sum_initial_bak,md5sum_initial)
-        md5sums_download(address)
-
-        changelog_initial = '/home/factory/canaan_factory/changelog'
-        changelog_initial_bak = '/home/factory/Avalon-extras/scripts/factory/changelog'
-
-        mymovefile(changelog_initial_bak,changelog_initial)
-        changelog_download(address)
-
-        MM921_initial = '/home/factory/canaan_factory/MM921.mcs'
-        MM921_initial_bak = '/home/factory/Avalon-extras/scripts/factory/MM921.mcs'
-
-        mymovefile(MM921_initial_bak,MM921_initial)
-
-        MM921_address = address + 'MM921.mcs'
-        print MM921_address
-
-        out_fname = 'MM921.mcs'
-        wget.download(MM921_address, out=out_fname)
-
-        os.chdir('/home/factory/Avalon-extras/scripts/factory')
-        check3 = os.popen('cat md5sums | grep MM921.mcs | cut -c 1-32')
-        check4 = os.popen('md5sum MM921.mcs | cut -c 1-32')
-        ck3 =  check3.read()
-        ck4 =  check4.read()
-        print ck3
-        print ck4
-        checkfirmware(ck3,ck4)
-    elif model == 'pmu':
-        print "This is avalon921 pmu firmware"
-        os.chdir('/home/factory/Avalon-extras/scripts/factory')
-        global address
-        md5sum_initial = '/home/factory/canaan_factory/md5sums'
-        md5sum_initial_bak = '/home/factory/Avalon-extras/scripts/factory/md5sums'
-
-        mymovefile(md5sum_initial_bak,md5sum_initial)
-        md5sums_download(address)
-
-        changelog_initial = '/home/factory/canaan_factory/changelog'
-        changelog_initial_bak = '/home/factory/Avalon-extras/scripts/factory/changelog'
-
-        mymovefile(changelog_initial_bak,changelog_initial)
-        changelog_download(address)
-
-        pmu921_initial = '/home/factory/canaan_factory/pmu921.axf'
-        pmu921_initial_bak = '/home/factory/Avalon-extras/scripts/factory/pmu921.axf'
-
-        mymovefile(pmu921_initial_bak,pmu921_initial)
-
-        pmu921_address = address + 'pmu921.axf'
-        print pmu921_address
-
-        out_fname = 'pmu921.axf'
-        wget.download(pmu921_address, out=out_fname)
-        os.chdir('/home/factory/Avalon-extras/scripts/factory')
-        check3 = os.popen('cat md5sums | grep pmu921.axf | cut -c 1-32')
-        check4 = os.popen('md5sum pmu921.axf | cut -c 1-32')
-        ck3 =  check3.read()
-        ck4 =  check4.read()
-        print ck3
-        print ck4
-        checkfirmware(ck3,ck4)
+    if page.getcode() != 200:
+        os._exit()
     else:
-        print "--------------Error----------------------------------------"
+        print "服务器链接访问成功"
+
+    print "从服务器端获取的内容是",contents
+
+    #print 'http header:/n', page.info() 
+    #print 'http status:', page.getcode() 
+
+    result = re.search( r'("Download_link": ")(.*?)(")', contents, re.M|re.I)
+    address = result.group(2)
+    print  "固件下载目录是",address
+
+    ver = versioncheck()
+
+    srcfile = '/home/factory/canaan_changelog'
+    foldercheck(srcfile)
+
+
+    os.chdir('/home/factory/canaan_changelog')
+    changelogaddress = address + 'changelog'
+    print changelogaddress
+
+    out_fname = 'changelog.log'
+    wget.download(changelogaddress, out=out_fname)
+
+
+    print "当前工作目录 : %s" % os.getcwd()
+    os.system("ls")
+
+    check1 = os.popen('cat changelog.log | grep Version | cut -c 9-23').read()
+    print "---------------"
+    print check1
+    print "---------------"
+
+    os.chdir('/home/factory/Avalon-extras/scripts/factory')
+    print "当前工作目录 : %s" % os.getcwd()
+    os.system("ls")
+
+    check2 = os.popen('cat changelog | grep Version | cut -c 9-21').read()
+    #check2 = os.popen('cat changelog | grep Version | cut -c 9-23').read()
+
+    print "--------------"
+    print check2
+    print "--------------"
+
+    changelogcheck(check1,check2)
+
+
+    miner = minermodel(address).strip()
+    model = burnmodel(address).strip()
+
+
+    if miner == 'avalon921':
+        print "This is avalon921 miner"
+        if model == 'mm':
+            print "This is avalon921 MM firmware"
+            os.chdir('/home/factory/Avalon-extras/scripts/factory')
+            global address
+            md5sum_initial = '/home/factory/canaan_factory/md5sums'
+            md5sum_initial_bak = '/home/factory/Avalon-extras/scripts/factory/md5sums'
+
+            mymovefile(md5sum_initial_bak,md5sum_initial)
+            md5sums_download(address)
+
+            changelog_initial = '/home/factory/canaan_factory/changelog'
+            changelog_initial_bak = '/home/factory/Avalon-extras/scripts/factory/changelog'
+
+            mymovefile(changelog_initial_bak,changelog_initial)
+            changelog_download(address)
+
+            MM921_initial = '/home/factory/canaan_factory/MM921.mcs'
+            MM921_initial_bak = '/home/factory/Avalon-extras/scripts/factory/MM921.mcs'
+
+            mymovefile(MM921_initial_bak,MM921_initial)
+
+            MM921_address = address + 'MM921.mcs'
+            print MM921_address
+
+            out_fname = 'MM921.mcs'
+            wget.download(MM921_address, out=out_fname)
+
+            os.chdir('/home/factory/Avalon-extras/scripts/factory')
+            check3 = os.popen('cat md5sums | grep MM921.mcs | cut -c 1-32')
+            check4 = os.popen('md5sum MM921.mcs | cut -c 1-32')
+            ck3 =  check3.read()
+            ck4 =  check4.read()
+            print ck3
+            print ck4
+            checkfirmware(ck3,ck4)
+        elif model == 'pmu':
+            print "This is avalon921 pmu firmware"
+            os.chdir('/home/factory/Avalon-extras/scripts/factory')
+            global address
+            md5sum_initial = '/home/factory/canaan_factory/md5sums'
+            md5sum_initial_bak = '/home/factory/Avalon-extras/scripts/factory/md5sums'
+
+            mymovefile(md5sum_initial_bak,md5sum_initial)
+            md5sums_download(address)
+
+            changelog_initial = '/home/factory/canaan_factory/changelog'
+            changelog_initial_bak = '/home/factory/Avalon-extras/scripts/factory/changelog'
+
+            mymovefile(changelog_initial_bak,changelog_initial)
+            changelog_download(address)
+
+            pmu921_initial = '/home/factory/canaan_factory/pmu921.axf'
+            pmu921_initial_bak = '/home/factory/Avalon-extras/scripts/factory/pmu921.axf'
+
+            mymovefile(pmu921_initial_bak,pmu921_initial)
+
+            pmu921_address = address + 'pmu921.axf'
+            print pmu921_address
+
+            out_fname = 'pmu921.axf'
+            wget.download(pmu921_address, out=out_fname)
+            os.chdir('/home/factory/Avalon-extras/scripts/factory')
+            check3 = os.popen('cat md5sums | grep pmu921.axf | cut -c 1-32')
+            check4 = os.popen('md5sum pmu921.axf | cut -c 1-32')
+            ck3 =  check3.read()
+            ck4 =  check4.read()
+            print ck3
+            print ck4
+            checkfirmware(ck3,ck4)
+        else:
+            print "--------------系统错误----------------------------------------"
+
+
+    if miner == 'avalon851':
+        print "This is avalon851 miner"
+        if model == 'mm':
+            print "This is avalon851 MM firmware"
+            os.chdir('/home/factory/Avalon-extras/scripts/factory')
+            global address
+            md5sum_initial = '/home/factory/canaan_factory/md5sums'
+            md5sum_initial_bak = '/home/factory/Avalon-extras/scripts/factory/md5sums'
+
+            mymovefile(md5sum_initial_bak,md5sum_initial)
+            md5sums_download(address)
+
+            changelog_initial = '/home/factory/canaan_factory/changelog'
+            changelog_initial_bak = '/home/factory/Avalon-extras/scripts/factory/changelog'
+
+            mymovefile(changelog_initial_bak,changelog_initial)
+            changelog_download(address)
+
+            MM851_initial = '/home/factory/canaan_factory/MM851.mcs'
+            MM851_initial_bak = '/home/factory/Avalon-extras/scripts/factory/MM851.mcs'
+
+            mymovefile(MM851_initial_bak,MM851_initial)
+
+            MM851_address = address + 'MM851.mcs'
+            print MM851_address
+
+            out_fname = 'MM851.mcs'
+            wget.download(MM851_address, out=out_fname)
+
+            os.chdir('/home/factory/Avalon-extras/scripts/factory')
+            check3 = os.popen('cat md5sums | grep MM851.mcs | cut -c 1-32')
+            check4 = os.popen('md5sum MM851.mcs | cut -c 1-32')
+            ck3 =  check3.read()
+            ck4 =  check4.read()
+            print ck3
+            print ck4
+            checkfirmware(ck3,ck4)
+        elif model == 'pmu':
+            print "This is avalon851 pmu firmware"
+            os.chdir('/home/factory/Avalon-extras/scripts/factory')
+            global address
+            md5sum_initial = '/home/factory/canaan_factory/md5sums'
+            md5sum_initial_bak = '/home/factory/Avalon-extras/scripts/factory/md5sums'
+
+            mymovefile(md5sum_initial_bak,md5sum_initial)
+            md5sums_download(address)
+
+            changelog_initial = '/home/factory/canaan_factory/changelog'
+            changelog_initial_bak = '/home/factory/Avalon-extras/scripts/factory/changelog'
+
+            mymovefile(changelog_initial_bak,changelog_initial)
+            changelog_download(address)
+
+            pmu851_initial = '/home/factory/canaan_factory/pmu851.axf'
+            pmu851_initial_bak = '/home/factory/Avalon-extras/scripts/factory/pmu851.axf'
+
+            mymovefile(pmu851_initial_bak,pmu851_initial)
+
+            pmu851_address = address + 'pmu851.axf'
+            print pmu851_address
+
+            out_fname = 'pmu851.axf'
+            wget.download(pmu851_address, out=out_fname)
+            os.chdir('/home/factory/Avalon-extras/scripts/factory')
+            check3 = os.popen('cat md5sums | grep pmu851.axf | cut -c 1-32')
+            check4 = os.popen('md5sum pmu851.axf | cut -c 1-32')
+            ck3 =  check3.read()
+            ck4 =  check4.read()
+            print ck3
+            print ck4
+            checkfirmware(ck3,ck4)
+        else:
+            print "--------------系统错误----------------------------------------"
 
 
 os.chdir('/home/factory/Avalon-extras/scripts/factory')
 mychangelog = os.popen('cat changelog | grep Version | cut -c 9-23').read()
 print "当前电脑固件版本是",mychangelog
-
-
 
 
 url = str +'&b=%s'%mychangelog + '&c=%s'%ver 
