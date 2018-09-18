@@ -37,8 +37,9 @@ def foldercheck(srcfile):
 
 def changelogcheck(check1,check2):
     if check1 == check2:
-        print "固件版本已经是最新的,升级结束"
+        print "固件版本已经是最新的,升级结束,20秒后窗口自动关闭"
         os.system('rm -rf /home/factory/canaan_changelog')
+        os.system("sleep 20")
         exit(0)
         print "-------------Error------------------"
     else:
@@ -247,7 +248,7 @@ if __name__ == '__main__':
     print "当前工作目录 : %s" % os.getcwd()
     os.system("ls")
 
-    check2 = os.popen('cat changelog | grep Version | cut -c 9-21').read()
+    check2 = os.popen('cat changelog | grep Version | cut -c 9-23').read()
     #check2 = os.popen('cat changelog | grep Version | cut -c 9-23').read()
 
     print "--------------"
