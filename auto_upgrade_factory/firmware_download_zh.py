@@ -265,7 +265,7 @@ if __name__ == '__main__':
         if model == 'mm':
             print "This is avalon921 MM firmware"
             os.chdir('/home/factory/Avalon-extras/scripts/factory')
-            global address
+            #global address
             md5sum_initial = '/home/factory/canaan_factory/md5sums'
             md5sum_initial_bak = '/home/factory/Avalon-extras/scripts/factory/md5sums'
 
@@ -300,7 +300,7 @@ if __name__ == '__main__':
         elif model == 'pmu':
             print "This is avalon921 pmu firmware"
             os.chdir('/home/factory/Avalon-extras/scripts/factory')
-            global address
+            #global address
             md5sum_initial = '/home/factory/canaan_factory/md5sums'
             md5sum_initial_bak = '/home/factory/Avalon-extras/scripts/factory/md5sums'
 
@@ -332,7 +332,7 @@ if __name__ == '__main__':
             print ck4
             checkfirmware(ck3,ck4)
         else:
-            print "--------------系统错误----------------------------------------"
+            print "--------------系统错误,请联系北京工程师解决----------------------------------------"
 
 
     if miner == 'avalon851':
@@ -340,7 +340,7 @@ if __name__ == '__main__':
         if model == 'mm':
             print "This is avalon851 MM firmware"
             os.chdir('/home/factory/Avalon-extras/scripts/factory')
-            global address
+            #global address
             md5sum_initial = '/home/factory/canaan_factory/md5sums'
             md5sum_initial_bak = '/home/factory/Avalon-extras/scripts/factory/md5sums'
 
@@ -375,7 +375,7 @@ if __name__ == '__main__':
         elif model == 'pmu':
             print "This is avalon851 pmu firmware"
             os.chdir('/home/factory/Avalon-extras/scripts/factory')
-            global address
+            #global address
             md5sum_initial = '/home/factory/canaan_factory/md5sums'
             md5sum_initial_bak = '/home/factory/Avalon-extras/scripts/factory/md5sums'
 
@@ -407,7 +407,7 @@ if __name__ == '__main__':
             print ck4
             checkfirmware(ck3,ck4)
         else:
-            print "--------------系统错误----------------------------------------"
+            print "--------------系统错误,请联系北京工程师解决----------------------------------------"
 
 
 os.chdir('/home/factory/Avalon-extras/scripts/factory')
