@@ -23,6 +23,7 @@ import subprocess
 #2018-9-16 20:00  Firmware upgrade first version
 #2018-9-16 20:51  Add check firmware funtion and add chinese 
 #2018-9-17 09:52  Add 851 upgrde funtion
+#2018-9-18 14:44  Add Desktop 
 
 def foldercheck(srcfile):
     if not os.path.exists(srcfile):
@@ -297,6 +298,8 @@ if __name__ == '__main__':
             print ck3
             print ck4
             checkfirmware(ck3,ck4)
+            os.chdir('/home/factory/Avalon-extras/scripts/factory/desktop')
+            os.system("cp burntestscanavalon921_mm.desktop  ~/Desktop")
         elif model == 'pmu':
             print "This is avalon921 pmu firmware"
             os.chdir('/home/factory/Avalon-extras/scripts/factory')
@@ -331,6 +334,8 @@ if __name__ == '__main__':
             print ck3
             print ck4
             checkfirmware(ck3,ck4)
+            os.chdir('/home/factory/Avalon-extras/scripts/factory/desktop')
+            os.system("cp burntestscanavalon921_pmu.desktop  ~/Desktop")
         else:
             print "--------------系统错误,请联系北京工程师解决----------------------------------------"
 
@@ -372,6 +377,8 @@ if __name__ == '__main__':
             print ck3
             print ck4
             checkfirmware(ck3,ck4)
+            os.chdir('/home/factory/Avalon-extras/scripts/factory/desktop')
+            os.system("cp burntestavalon851_mm.desktop  ~/Desktop")
         elif model == 'pmu':
             print "This is avalon851 pmu firmware"
             os.chdir('/home/factory/Avalon-extras/scripts/factory')
@@ -406,6 +413,8 @@ if __name__ == '__main__':
             print ck3
             print ck4
             checkfirmware(ck3,ck4)
+            os.chdir('/home/factory/Avalon-extras/scripts/factory/desktop')
+            os.system("cp burntestavalon851_pmu.desktop  ~/Desktop")
         else:
             print "--------------系统错误,请联系北京工程师解决----------------------------------------"
 
