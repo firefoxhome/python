@@ -24,6 +24,7 @@ import subprocess
 #2018-9-16 20:51  Add check firmware funtion and add chinese 
 #2018-9-17 09:52  Add 851 upgrde funtion
 #2018-9-18 14:44  Add Desktop 
+#2018-9-19 20:36  Add 841 MM PMU download funtion
 
 def foldercheck(srcfile):
     if not os.path.exists(srcfile):
@@ -418,6 +419,87 @@ if __name__ == '__main__':
             os.system("cp burntestavalon851_pmu.desktop  ~/Desktop")
         else:
             print "--------------系统错误,请联系北京工程师解决----------------------------------------"
+
+
+
+    if miner == 'avalon841':
+        print "This is avalon841 miner"
+        if model == 'mm':
+            print "This is avalon841 MM firmware"
+            os.chdir('/home/factory/Avalon-extras/scripts/factory')
+            #global address
+            md5sum_initial = '/home/factory/canaan_factory/md5sums'
+            md5sum_initial_bak = '/home/factory/Avalon-extras/scripts/factory/md5sums'
+
+            mymovefile(md5sum_initial_bak,md5sum_initial)
+            md5sums_download(address)
+
+            changelog_initial = '/home/factory/canaan_factory/changelog'
+            changelog_initial_bak = '/home/factory/Avalon-extras/scripts/factory/changelog'
+
+            mymovefile(changelog_initial_bak,changelog_initial)
+            changelog_download(address)
+
+            MM841_initial = '/home/factory/canaan_factory/MM841.mcs'
+            MM841_initial_bak = '/home/factory/Avalon-extras/scripts/factory/MM841.mcs'
+
+            mymovefile(MM841_initial_bak,MM841_initial)
+
+            MM841_address = address + 'MM841.mcs'
+            print MM841_address
+
+            out_fname = 'MM841.mcs'
+            wget.download(MM841_address, out=out_fname)
+
+            os.chdir('/home/factory/Avalon-extras/scripts/factory')
+            check3 = os.popen('cat md5sums | grep MM841.mcs | cut -c 1-32')
+            check4 = os.popen('md5sum MM841.mcs | cut -c 1-32')
+            ck3 =  check3.read()
+            ck4 =  check4.read()
+            print ck3
+            print ck4
+            checkfirmware(ck3,ck4)
+            os.chdir('/home/factory/Avalon-extras/scripts/factory/desktop')
+            os.system("cp burnavalon8_841mm.desktop  ~/Desktop")
+        elif model == 'pmu':
+            print "This is avalon841 pmu firmware"
+            os.chdir('/home/factory/Avalon-extras/scripts/factory')
+            #global address
+            md5sum_initial = '/home/factory/canaan_factory/md5sums'
+            md5sum_initial_bak = '/home/factory/Avalon-extras/scripts/factory/md5sums'
+
+            mymovefile(md5sum_initial_bak,md5sum_initial)
+            md5sums_download(address)
+
+            changelog_initial = '/home/factory/canaan_factory/changelog'
+            changelog_initial_bak = '/home/factory/Avalon-extras/scripts/factory/changelog'
+
+            mymovefile(changelog_initial_bak,changelog_initial)
+            changelog_download(address)
+
+            pmu841_initial = '/home/factory/canaan_factory/pmu841.axf'
+            pmu841_initial_bak = '/home/factory/Avalon-extras/scripts/factory/pmu841.axf'
+
+            mymovefile(pmu841_initial_bak,pmu841_initial)
+
+            pmu841_address = address + 'pmu841.axf'
+            print pmu841_address
+
+            out_fname = 'pmu841.axf'
+            wget.download(pmu841_address, out=out_fname)
+            os.chdir('/home/factory/Avalon-extras/scripts/factory')
+            check3 = os.popen('cat md5sums | grep pmu841.axf | cut -c 1-32')
+            check4 = os.popen('md5sum pmu841.axf | cut -c 1-32')
+            ck3 =  check3.read()
+            ck4 =  check4.read()
+            print ck3
+            print ck4
+            checkfirmware(ck3,ck4)
+            os.chdir('/home/factory/Avalon-extras/scripts/factory/desktop')
+            os.system("cp burntestavalon841_pmu.desktop  ~/Desktop")
+        else:
+            print "--------------系统错误,请联系北京工程师解决----------------------------------------"
+
 
 
 os.chdir('/home/factory/Avalon-extras/scripts/factory')
