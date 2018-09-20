@@ -25,13 +25,14 @@ import subprocess
 #2018-9-17 09:52  Add 851 upgrde funtion
 #2018-9-18 14:44  Add Desktop 
 #2018-9-19 20:36  Add 841 MM PMU download funtion
+#2018-9-20 20:07  Add chinese note
 
 def foldercheck(srcfile):
     if not os.path.exists(srcfile):
         print "%s 目录不存在!"%(srcfile)
         path = "/home/factory/canaan_changelog"
         os.makedirs( path,0755)
-        print  "canaan_changelog目录创建成功"
+        print  "canaan_changelog目录创建成功,进入canaan_changelog目录"
     else:
         print  "进入canaan_changelog目录"
 
@@ -242,7 +243,7 @@ if __name__ == '__main__':
 
     check1 = os.popen('cat changelog.log | grep Version | cut -c 9-23').read()
     print "---------------"
-    print check1
+    print "需要更新的固件版本是",check1
     print "---------------"
 
     os.chdir('/home/factory/Avalon-extras/scripts/factory')
@@ -253,7 +254,7 @@ if __name__ == '__main__':
     #check2 = os.popen('cat changelog | grep Version | cut -c 9-23').read()
 
     print "--------------"
-    print check2
+    print "当前本地的固件版本是",check2
     print "--------------"
 
     changelogcheck(check1,check2)
