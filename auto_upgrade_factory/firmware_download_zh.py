@@ -26,6 +26,7 @@ import subprocess
 #2018-9-18 14:44  Add Desktop 
 #2018-9-19 20:36  Add 841 MM PMU download funtion
 #2018-9-20 20:07  Add chinese note
+#2018-9-29 19:00  Adjust changelog position
 
 def foldercheck(srcfile):
     if not os.path.exists(srcfile):
@@ -115,6 +116,8 @@ def checkfirmware(fs,fd):
         print "固件下载成功"
     else:
         print "md5sums 校验错误，请联系北京工程师解决"
+        os.system("sleep 25")
+        exit(0)
 
 
 def check(fs,fd):
@@ -276,12 +279,6 @@ if __name__ == '__main__':
             mymovefile(md5sum_initial_bak,md5sum_initial)
             md5sums_download(address)
 
-            changelog_initial = '/home/factory/canaan_factory/changelog'
-            changelog_initial_bak = '/home/factory/Avalon-extras/scripts/factory/changelog'
-
-            mymovefile(changelog_initial_bak,changelog_initial)
-            changelog_download(address)
-
             MM921_initial = '/home/factory/canaan_factory/MM921.mcs'
             MM921_initial_bak = '/home/factory/Avalon-extras/scripts/factory/MM921.mcs'
 
@@ -292,6 +289,13 @@ if __name__ == '__main__':
 
             out_fname = 'MM921.mcs'
             wget.download(MM921_address, out=out_fname)
+
+            changelog_initial = '/home/factory/canaan_factory/changelog'
+            changelog_initial_bak = '/home/factory/Avalon-extras/scripts/factory/changelog'
+
+            mymovefile(changelog_initial_bak,changelog_initial)
+            changelog_download(address)
+
 
             os.chdir('/home/factory/Avalon-extras/scripts/factory')
             check3 = os.popen('cat md5sums | grep MM921.mcs | cut -c 1-32')
@@ -313,12 +317,6 @@ if __name__ == '__main__':
             mymovefile(md5sum_initial_bak,md5sum_initial)
             md5sums_download(address)
 
-            changelog_initial = '/home/factory/canaan_factory/changelog'
-            changelog_initial_bak = '/home/factory/Avalon-extras/scripts/factory/changelog'
-
-            mymovefile(changelog_initial_bak,changelog_initial)
-            changelog_download(address)
-
             pmu921_initial = '/home/factory/canaan_factory/pmu921.axf'
             pmu921_initial_bak = '/home/factory/Avalon-extras/scripts/factory/pmu921.axf'
 
@@ -329,6 +327,14 @@ if __name__ == '__main__':
 
             out_fname = 'pmu921.axf'
             wget.download(pmu921_address, out=out_fname)
+
+            changelog_initial = '/home/factory/canaan_factory/changelog'
+            changelog_initial_bak = '/home/factory/Avalon-extras/scripts/factory/changelog'
+
+            mymovefile(changelog_initial_bak,changelog_initial)
+            changelog_download(address)
+
+
             os.chdir('/home/factory/Avalon-extras/scripts/factory')
             check3 = os.popen('cat md5sums | grep pmu921.axf | cut -c 1-32')
             check4 = os.popen('md5sum pmu921.axf | cut -c 1-32')
@@ -355,12 +361,6 @@ if __name__ == '__main__':
             mymovefile(md5sum_initial_bak,md5sum_initial)
             md5sums_download(address)
 
-            changelog_initial = '/home/factory/canaan_factory/changelog'
-            changelog_initial_bak = '/home/factory/Avalon-extras/scripts/factory/changelog'
-
-            mymovefile(changelog_initial_bak,changelog_initial)
-            changelog_download(address)
-
             MM851_initial = '/home/factory/canaan_factory/MM851.mcs'
             MM851_initial_bak = '/home/factory/Avalon-extras/scripts/factory/MM851.mcs'
 
@@ -371,6 +371,12 @@ if __name__ == '__main__':
 
             out_fname = 'MM851.mcs'
             wget.download(MM851_address, out=out_fname)
+
+            changelog_initial = '/home/factory/canaan_factory/changelog'
+            changelog_initial_bak = '/home/factory/Avalon-extras/scripts/factory/changelog'
+
+            mymovefile(changelog_initial_bak,changelog_initial)
+            changelog_download(address)
 
             os.chdir('/home/factory/Avalon-extras/scripts/factory')
             check3 = os.popen('cat md5sums | grep MM851.mcs | cut -c 1-32')
@@ -392,12 +398,6 @@ if __name__ == '__main__':
             mymovefile(md5sum_initial_bak,md5sum_initial)
             md5sums_download(address)
 
-            changelog_initial = '/home/factory/canaan_factory/changelog'
-            changelog_initial_bak = '/home/factory/Avalon-extras/scripts/factory/changelog'
-
-            mymovefile(changelog_initial_bak,changelog_initial)
-            changelog_download(address)
-
             pmu851_initial = '/home/factory/canaan_factory/pmu851.axf'
             pmu851_initial_bak = '/home/factory/Avalon-extras/scripts/factory/pmu851.axf'
 
@@ -408,6 +408,13 @@ if __name__ == '__main__':
 
             out_fname = 'pmu851.axf'
             wget.download(pmu851_address, out=out_fname)
+
+            changelog_initial = '/home/factory/canaan_factory/changelog'
+            changelog_initial_bak = '/home/factory/Avalon-extras/scripts/factory/changelog'
+
+            mymovefile(changelog_initial_bak,changelog_initial)
+            changelog_download(address)
+
             os.chdir('/home/factory/Avalon-extras/scripts/factory')
             check3 = os.popen('cat md5sums | grep pmu851.axf | cut -c 1-32')
             check4 = os.popen('md5sum pmu851.axf | cut -c 1-32')
@@ -435,11 +442,6 @@ if __name__ == '__main__':
             mymovefile(md5sum_initial_bak,md5sum_initial)
             md5sums_download(address)
 
-            changelog_initial = '/home/factory/canaan_factory/changelog'
-            changelog_initial_bak = '/home/factory/Avalon-extras/scripts/factory/changelog'
-
-            mymovefile(changelog_initial_bak,changelog_initial)
-            changelog_download(address)
 
             MM841_initial = '/home/factory/canaan_factory/MM841.mcs'
             MM841_initial_bak = '/home/factory/Avalon-extras/scripts/factory/MM841.mcs'
@@ -448,9 +450,14 @@ if __name__ == '__main__':
 
             MM841_address = address + 'MM841.mcs'
             print MM841_address
-
             out_fname = 'MM841.mcs'
             wget.download(MM841_address, out=out_fname)
+
+            changelog_initial = '/home/factory/canaan_factory/changelog'
+            changelog_initial_bak = '/home/factory/Avalon-extras/scripts/factory/changelog'
+
+            mymovefile(changelog_initial_bak,changelog_initial)
+            changelog_download(address)
 
             os.chdir('/home/factory/Avalon-extras/scripts/factory')
             check3 = os.popen('cat md5sums | grep MM841.mcs | cut -c 1-32')
@@ -461,7 +468,7 @@ if __name__ == '__main__':
             print ck4
             checkfirmware(ck3,ck4)
             os.chdir('/home/factory/Avalon-extras/scripts/factory/desktop')
-            os.system("cp burnavalon8_841mm.desktop  ~/Desktop")
+            os.system("cp burntestavalon841_mm.desktop  ~/Desktop")
         elif model == 'pmu':
             print "This is avalon841 pmu firmware"
             os.chdir('/home/factory/Avalon-extras/scripts/factory')
@@ -472,25 +479,20 @@ if __name__ == '__main__':
             mymovefile(md5sum_initial_bak,md5sum_initial)
             md5sums_download(address)
 
-            changelog_initial = '/home/factory/canaan_factory/changelog'
-            changelog_initial_bak = '/home/factory/Avalon-extras/scripts/factory/changelog'
+            pmu821_initial = '/home/factory/canaan_factory/pmu821.axf'
+            pmu821_initial_bak = '/home/factory/Avalon-extras/scripts/factory/pmu821.axf'
 
-            mymovefile(changelog_initial_bak,changelog_initial)
-            changelog_download(address)
+            mymovefile(pmu821_initial_bak,pmu821_initial)
 
-            pmu841_initial = '/home/factory/canaan_factory/pmu841.axf'
-            pmu841_initial_bak = '/home/factory/Avalon-extras/scripts/factory/pmu841.axf'
+            pmu821_address = address + 'pmu821.axf'
+            print pmu821_address
 
-            mymovefile(pmu841_initial_bak,pmu841_initial)
-
-            pmu841_address = address + 'pmu841.axf'
-            print pmu841_address
-
-            out_fname = 'pmu841.axf'
+            out_fname = 'pmu821.axf'
             wget.download(pmu841_address, out=out_fname)
+
             os.chdir('/home/factory/Avalon-extras/scripts/factory')
-            check3 = os.popen('cat md5sums | grep pmu841.axf | cut -c 1-32')
-            check4 = os.popen('md5sum pmu841.axf | cut -c 1-32')
+            check3 = os.popen('cat md5sums | grep pmu821.axf | cut -c 1-32')
+            check4 = os.popen('md5sum pmu821.axf | cut -c 1-32')
             ck3 =  check3.read()
             ck4 =  check4.read()
             print ck3
@@ -498,6 +500,12 @@ if __name__ == '__main__':
             checkfirmware(ck3,ck4)
             os.chdir('/home/factory/Avalon-extras/scripts/factory/desktop')
             os.system("cp burntestavalon841_pmu.desktop  ~/Desktop")
+
+            changelog_initial = '/home/factory/canaan_factory/changelog'
+            changelog_initial_bak = '/home/factory/Avalon-extras/scripts/factory/changelog'
+
+            mymovefile(changelog_initial_bak,changelog_initial)
+            changelog_download(address)
         else:
             print "--------------系统错误,请联系北京工程师解决----------------------------------------"
 
